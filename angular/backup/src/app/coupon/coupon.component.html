@@ -1,0 +1,67 @@
+<div class="collapse" id="collapseCoupon" style="margin: 15px">
+    <div class="card card-body">
+        <div class="row">
+            <div class="form-group col-4">
+                <label for="CouponName">Name</label>
+                <input type="text" class="form-control" id="CouponName" [(ngModel)]="couponInput.name" placeholder="Enter Name">
+            </div>
+            <div class="form-group col-4">
+                <label for="CouponAmount">Amount</label>
+                <input type="text" class="form-control" id="CouponAmount" [(ngModel)]="couponInput.amount" placeholder="Enter Amount">
+            </div>
+            <div class="form-group col-4">
+                <label for="couponIn">Select Coupon Mode</label>
+                <select id="couponIn" class="form-control" [(ngModel)]="couponInput.unit">
+                    <option selected value="NA">Select One</option>
+                    <option *ngFor="let couponUnit of couponUnitList" value="{{couponUnit.id}}">{{couponUnit.name}}</option>
+                </select>
+            </div>
+            <div class="col-12" style="text-align: center">
+                <button type="button" data-toggle="collapse" data-target="#collapseCoupon" aria-expanded="false" aria-controls="collapseCoupon"
+                    class="btn btn-primary" *ngIf="!editFlag" (click)="addCoupon()">Add</button>
+                <button type="button" data-toggle="collapse" data-target="#collapseCoupon" aria-expanded="false" aria-controls="collapseCoupon"
+                    class="btn btn-primary" *ngIf="editFlag" (click)="updateCoupon()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin: 15px;margin-top: 5%">
+    <div class="form-group has-search col-4">
+        <span class="searchIcon"><i class="fa fa-search"></i></span>
+        <input type="text" class="form-control filterSearch" placeholder="Search..." name="search" autocomplete="off">
+    </div>
+    <div class="col-3" data-toggle="collapse" data-target="#collapseCoupon" aria-expanded="false" aria-controls="collapseCoupon">
+        <a class="float"> <i class="fa fa-plus my-float"></i> </a>
+        <span style="    position: absolute; left: 41%; top: 11%;">New</span>
+    </div>
+    <div class="col-2">
+        <a class="float"> <i class="fas fa-arrow-up my-float"></i> </a>
+        <span style="    position: absolute; left: 41%; top: 11%;">Export</span>
+    </div>
+    <div class="col-12">
+        <table class="table" style="margin-top: 5%">
+            <thead style="background-color: #59d5ff; color: #ffffff;">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let Coupon of CouponList | paginate: { itemsPerPage: itemsPage, currentPage: p}; let i = index">
+                    <th scope="row"> {{ itemsPage * (p - 1) + i+1 }} </th>
+                    <td>{{Coupon.name}}</td>
+                    <td>{{Coupon.amount}}</td>
+                    <td>{{Coupon.unit}}</td>
+                    <td><span (click)="editCoupon(Coupon)"> <i class="fas fa-edit" data-toggle="collapse" data-target="#collapseCoupon"
+                                aria-expanded="false" aria-controls="collapseCoupon" style="color: green; cursor: pointer;"></i></span>/<span
+                            (click)="deleteCoupon(Coupon)"><i class="fas fa-trash-alt" style="color: red; cursor: pointer;"></i></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls (pageChange)="p = $event" style="text-align: center"></pagination-controls>

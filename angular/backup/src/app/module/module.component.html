@@ -1,0 +1,70 @@
+<div class="collapse" id="collapseModule" style="margin: 15px">
+    <div class="card card-body">
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label for="moduleRole">Select Role</label>
+                <select id="moduleRole" class="form-control" (change)="onRoleSelect($event.target.value)" [(ngModel)]="moduleInput.roleId">
+                    <option selected value="NA">Select One</option>
+                    <option *ngFor="let role of roleList" value="{{role.id}}">{{role.name}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="selectModule">Select Module</label>
+                <select id="selectModule" class="form-control" multiple (change)="onModuleSelect()" [(ngModel)]="moduleInput.moduleId">
+                    <option selected value="NA">Select One</option>
+                    <option *ngFor="let module of moduleList" value="{{module.id}}">{{module.name}}</option>
+                </select>
+            </div>
+            <div class="form-group col-6">
+                <label for="ModuleDescription">Description</label>
+                <textarea class="form-control" id="ModuleDescription" [(ngModel)]="moduleInput.description" rows="3"></textarea>
+            </div>
+            <div class="col-12" style="text-align: center">
+                <button type="button" data-toggle="collapse" data-target="#collapseModule" aria-expanded="false" aria-controls="collapseModule"
+                    class="btn btn-primary" *ngIf="!editFlag" (click)="addModule()">Add</button>
+                <button type="button" data-toggle="collapse" data-target="#collapseModule" aria-expanded="false" aria-controls="collapseModule"
+                    class="btn btn-primary" *ngIf="editFlag" (click)="updateModule()">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin: 15px;margin-top: 5%">
+    <div class="form-group has-search col-4">
+        <span class="searchIcon"><i class="fa fa-search"></i></span>
+        <input type="text" class="form-control filterSearch" placeholder="Search..." name="search" autocomplete="off">
+    </div>
+    <div class="col-3" data-toggle="collapse" data-target="#collapseModule" aria-expanded="false" aria-controls="collapseModule">
+        <a class="float"> <i class="fa fa-plus my-float"></i> </a>
+        <span style="    position: absolute; left: 41%; top: 11%;">New</span>
+    </div>
+    <div class="col-2">
+        <a class="float"> <i class="fas fa-arrow-up my-float"></i> </a>
+        <span style="    position: absolute; left: 41%; top: 11%;">Export</span>
+    </div>
+    <div class="col-12">
+        <table class="table" style="margin-top: 5%">
+            <thead style="background-color: #59d5ff; color: #ffffff;">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Module</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let assign of assignList | paginate: { itemsPerPage: itemsPage, currentPage: p}; let i = index">
+                    <th scope="row"> {{ itemsPage * (p - 1) + i+1 }} </th>
+                    <td>{{assign.role}}</td>
+                    <td>{{assign.module}}</td>
+                    <td>{{assign.description}}</td>
+                    <td><span (click)="editModule(assign)"> <i class="fas fa-edit" data-toggle="collapse" data-target="#collapseModule"
+                                aria-expanded="false" aria-controls="collapseModule" style="color: green; cursor: pointer;"></i></span>/<span
+                            (click)="deleteModule(assign)"><i class="fas fa-trash-alt" style="color: red; cursor: pointer;"></i></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls (pageChange)="p = $event" style="text-align: center"></pagination-controls>

@@ -1,0 +1,217 @@
+.card-form select.form-control.height-50 {
+    height: 50px !important;
+}
+
+.right{
+    float:right
+}
+
+input#icon {
+    background: transparent;
+}
+
+.pos-abs{
+    position: absolute;
+    z-index: 9;
+}
+.search-input{
+	border: 1px solid #ebebeb;
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 0;
+    border-radius: 4px;
+    padding: 10px 12px;
+    font-size: 12px;
+        color: #656e7b;
+}
+.member-search td {
+    padding: .5rem .75rem !important;
+}
+.member-input {
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    width: 100%;
+    padding: 7px 12px;
+
+}
+.member-search input{
+	outline: none !important;
+	box-shadow: none;
+}
+.search-output{
+	font-size: 11px;
+    text-align: center;
+    color: #656e7b;
+    width: 80px;     padding-bottom: 15px;
+    position: relative;
+    font-weight: 500;
+}
+.search-output img{
+	margin-bottom: 15px;
+}
+span.pointer {
+background: #c3c3c3;
+    color: #fff;
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    top: 27px;
+    right: 20px;
+    border-radius: 50%;
+    font-size: 13px;
+    cursor: pointer;
+    line-height: 18px;
+    text-align: center;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.search-box{
+    position: absolute;
+    box-shadow: 0 6px 0px 0 rgba(0, 0, 0, 0.01), 0 15px 32px 0 rgba(0, 0, 0, 0.06);
+    left: 0;
+    right: 0;
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+.search-box .table-small {
+	max-height: 200px;
+}
+
+.bg {
+    background-color: #FFF;
+}
+.date-report{
+	    position: absolute;
+    right: 10px;
+    top: 10px; 
+    z-index: 4;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+/*Prooject Edit*/
+.create-link {
+    color: #26335e;
+    font-size: 13px;
+    font-weight: 600;
+}
+.create-link i.icon-add {
+    color: #354169;
+    font-size: 26px;
+    background: #e7ebee;
+    padding: 7px;
+    border-radius: 50%;
+    display: inline-block;
+    text-align: center;
+}
+.create-link a{
+    display: flex;
+    align-items: center;
+    color: #354169;
+    text-decoration: none !important;
+
+}
+.create-box{
+    color: #26335d;
+    font-size: 14px; 
+    font-weight: 600;
+}
+.create-box a{
+    text-decoration: none;
+    color: #354169;
+    display: flex;
+    align-items: center;
+}
+.create-heading i{
+font-size: 32px;
+}
+.create-heading span, .create-input{
+    border-bottom: 2px solid #cccccc;
+    line-height: 30px;    
+    font-weight: 600;
+    width: 100%;    
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;    
+    outline: none !important;
+}
+.folder-box a{
+    font-size: 14px; 
+    font-weight: 500;
+    text-decoration: none;
+    color: #354169;
+}
+.file-selected{
+    color: #1c2038;
+    font-size: 12px;
+    font-weight: 500;
+}
+.upload-folder-box .btn-links a{
+    font-size: 14px; 
+    font-weight: 500;
+    text-decoration: none;
+    color: #354169;
+
+}
+.upload-folder-box .btn-links a:hover{
+    color: #656e7b !important;
+}
+.float-folder {
+    position: absolute;
+    top: 60px;
+    left: 0;
+    right: 0;
+    z-index: 9;
+}
+.folder-box a:hover{
+    color: #656e7b !important;
+}
+.mfile-upload {
+    position: relative;
+    overflow: hidden;
+}
+.dropdown-item {
+       color: #1c2038;
+    font-size: 12px;
+    font-weight: 500;    background: transparent !important;
+    border-color: transparent;
+    color: #1c2038 !important;
+}
+// .dropdown-item .upload{
+
+// }
+.mfile-upload input.minput-files {
+    position: absolute;
+    font-size: 50px;
+    opacity: 0;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    line-height: 50px;
+}
+.mfile{display: none;}
+
+select.create-dropdown {
+    font-size: 1rem;
+    font-weight: 600;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    border-bottom: 2px solid #cccccc;
+    width: 100%;
+    padding: 5px 0;
+    background-image: url(assets/images/dropdown-arrow.png);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-repeat: no-repeat;
+    background-position: center right 10px;    
+    outline: none !important;
+    background-color: #fff;    
+    border-radius: 0;
+}

@@ -1,0 +1,740 @@
+<ng-progress [positionUsing]="'marginLeft'" [minimum]="0.15" [maximum]="1" [speed]="200" [showSpinner]="false"
+    [direction]="'leftToRightIncreased'" [color]="'#ADC734'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'">
+</ng-progress>
+
+
+<div class="row">
+    <div class="col-md-9 col-lg-12 px-3 bg-white full-height">
+
+        <!-- Project Summery -->
+        <div class="card bg-info mt-0">
+            <div class="row d-flex align-items-center">
+                <div class="main-heading col-md-6 col-6">
+                    <h1 class="heading-title d-inline mb-0" *ngIf="!view && !edit">
+                        {{ 'commons.titles.addProject' | translate }}
+                    </h1>
+                    <h1 class="heading-title d-inline mb-0" *ngIf="view || edit">
+                        {{projectDetails.name}}
+                    </h1>
+                </div>
+                <div class="col-md-6 col-6 text-right" *ngIf="view && session.role.name !== 'Investor'">
+                    <a (click)="editGenInfo()" class="btn btn-primary">
+                        <i class="icon-edit text-white mr-2"></i>
+                        {{ 'commons.buttons.edit' | translate }}
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card ml-md-4 pl-md-0" *ngIf="view">
+            <div class="row">
+                <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0 pl-md-0">
+                    <div class="row">
+                        <div class="col-3 col-md-4 col-xl-3 d-flex align-items-center">
+                            <i class="icon-Date green-icon circle-icons"></i>
+                        </div>
+                        <div class="col-9 col-md-8 col-xl-9 pl-4">
+                            <h5 class="text-grey mb-2 mr-4 text-medium">{{ 'project.startDate' | translate }}</h5>
+                            <h1 class="heading-title">{{projectDetails?.start_date | date}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
+                    <div class="row">
+                        <div class="col-3 col-md-4 col-xl-3 d-flex align-items-center">
+                            <i class="icon-Duration purple-icon circle-icons"></i>
+                        </div>
+                        <div class="col-9 col-md-8 col-xl-9 pl-4">
+                            <h5 class="text-grey mb-2 mr-4 text-medium">{{ 'project.duration' | translate }}</h5>
+                            <h1 class="heading-title">{{projectDetails?.duration}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
+                    <div class="row">
+                        <div class="col-3 col-md-4 col-xl-3 d-flex align-items-center">
+                            <i class="icon-Member_count red-icon circle-icons"></i>
+                        </div>
+                        <div class="col-9 col-md-8 col-xl-9 pl-4">
+                            <h5 class="text-grey mb-2 mr-4 text-medium">{{ 'project.memCount' | translate }}</h5>
+                            <h1 class="heading-title">{{memberCount}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3 mb-4 mb-lg-0">
+                    <div class="row">
+                        <div class="col-3 col-md-4 col-xl-3 d-flex align-items-center">
+                            <i class="icon-Number-of-reports yellow-icon circle-icons"></i>
+                        </div>
+                        <div class="col-9 col-md-8 col-xl-9 pl-4">
+                            <h5 class="text-grey mb-2 mr-4 text-medium">{{ 'project.numOfReports' | translate }}</h5>
+                            <h1 class="heading-title">{{reportCount}}</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="card card-shadow" *ngIf="!view">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h1 class="heading-title mt-3">{{ 'project.genInfo' | translate }}</h1>
+                        <form class="card-form mt-4" [formGroup]="projGenInfoForm" role="form">
+                            <div class="messages"></div>
+                            <div class="controls">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label for="title">{{ 'project.projectName' | translate }}</label>
+                                            <input id="project_name" type="text" formControlName="name" name="project_name"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="date">{{ 'project.startDate' | translate }}</label>
+                                            <input class="form-control" placeholder="DD.MM.YYYY" name="dp" [(ngModel)]="model"
+                                                ngbDatepicker #d="ngbDatepicker" formControlName="start_date"
+                                                (dateSelect)="onDateSelect($event)" (click)="d.toggle(); $event.stopPropagation();"
+                                                (document:click)="closeFix($event, d)">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group">
+                                            <label for="duration">{{ 'project.duration' | translate }}</label>
+                                            <input id="duration" type="text" name="duration" class="form-control"
+                                                formControlName="duration">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-group upload-dropdown">
+                                            <label for="form_icon">{{ 'project.iconUpload' | translate }}</label>
+                                            <div id="icon" style="padding-top:13px !important" class="form-control upload-dropdown"
+                                                data-toggle="dropdown">
+                                                <div *ngIf="iconImage" class="col-md-12">
+                                                    {{projectName}}
+                                                    <img style="margin-left:20px;" [src]="iconImage" width="20" height="20" />
+                                                </div>
+                                                <div *ngIf="!iconImage" class="col-md-12">
+                                                    {{ 'project.selectIcon' | translate }}
+                                                </div>
+                                            </div>
+                                            <input id="icon" type="hidden" name="icon" class="form-control"
+                                                formControlName="tempImage" readonly>
+                                            <input type="hidden" formControlName="image">
+
+                                            <div class="dropdown-menu">
+                                                <h5 class="dropdown-header">{{ 'project.selectIcon' | translate }}</h5>
+                                                <div class="dropdown-item" *ngFor="let icon of projectsIconArray">
+                                                    <div class="row" (click)="setImageName(icon.name, icon.image)">
+                                                        <div class="col-md-2 nav-icon pr-0">
+                                                            <img [src]="icon.image" alt="{{icon.name}}">
+                                                        </div>
+                                                        <div class="col-md-10 nav-text">
+                                                            <p class="sub-title">{{icon.name}}</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="file-upload dropdown-item text-center">
+                                                    {{ 'project.uploadNew' | translate }}
+                                                    <input type="file" name="file" class="input-icon" (change)="onFileChange($event, imageCropper)"
+                                                        #fileInput />
+                                                    <span class="input-value text-grey"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <label for="form_message">{{ 'project.investor' | translate }}</label>
+                                        <angular2-multiselect [data]="dropdownList" name="investor" [(ngModel)]="selectedItems"
+                                            [settings]="dropdownSettings" (onSelect)="onItemSelect($event)"
+                                            (onDeSelect)="onItemDeSelect($event)" formControlName="members" class="form-control">
+                                            <c-item class="form-group">
+                                                <ng-template let-item="item" class="pointer">
+                                                    <img [src]="item.image" class="rounded-circle" [ngClass]="{'tick': item.show === true }"
+                                                        style="width:40px; border: 1px solid #efefef;margin-right: 20px;" />
+                                                    <label style="color: #333;min-width: 150px; cursor: pointer">
+                                                        {{item.itemName}}
+                                                    </label>
+                                                </ng-template>
+                                            </c-item>
+                                        </angular2-multiselect>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <button class="btn btn-primary" *ngIf="!edit" (click)="addGenInfo()">
+                                        {{ 'commons.titles.addProject' | translate }}
+                                    </button>
+                                    <button class="btn mr-md-3" *ngIf="edit" (click)="view = true">
+                                        {{ 'commons.buttons.cancel' | translate }}
+                                    </button>
+                                    <button class="btn btn-primary" *ngIf="edit" (click)="updateGenInfo(projectDetails.id)">
+                                        {{ 'project.updateProject' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Project Summery -->
+
+
+
+        <div class="main-wrapper pt-0" *ngIf="view">
+            <!--main - wrapper starts-->
+            <div class="box-wrapper">
+                <!--box-wrapper starts-->
+                <div class="card pl-0 pr-0 pb-0">
+                    <div class="card-body">
+                        <div class="table-wrapper">
+                            <!--transaction history starts-->
+
+                            <!-- Reports Section -->
+                            <div class="card card-shadow">
+                                <div class="card-body">
+                                    <!--card-body starts-->
+                                    <div class="row mt-2" *ngIf="!isVisible">
+                                        <div class="col-md-5 d-flex align-items-center">
+                                            <h1 class="heading-title">
+                                                {{ 'project.reportTitle' | translate }}
+                                            </h1>
+                                        </div>
+                                        <div class="col-md-4  mt-3 mt-md-0">
+                                            <div class="input-group date" data-provide="datepicker" id="dateRangePicker">
+                                                <div class="input-group-addon border-none">
+                                                    {{ 'project.dateRange' | translate }}
+                                                </div>
+                                                <!-- <input type="text" ngModel="{{selectedDateRange}}" (click)="dateRange = !dateRange"
+                                                    class="form-control border-left-radius"> -->
+                                                <!-- <div class="input-group-addon" (click)="dateRange = !dateRange">
+                                                    <i class="icon-Date-range"></i> 
+                                                 </div> -->
+                                                <input class="form-control bg" id="dateRange" [value]="selectedDateRange"
+                                                    name="dp" ngbDatepicker #dp="ngbDatepicker" (dateSelect)="onDateSelection($event)"
+                                                    [displayMonths]="2" [dayTemplate]="t" [autoClose]="false" (click)="dp.toggle(); isOpen = !isOpen"
+                                                    readonly />
+                                                <i (click)="dp.toggle(); isOpen = !isOpen" class="icon-Date-range date-report"></i>
+
+                                            </div>
+                                            <!-- <ngb-datepicker class="pos-abs" *ngIf="dateRange" #dp1 ngModel (ngModelChange)="onDateChange($event)"
+                                            [displayMonths]="2" [dayTemplate]="t">
+                                        </ngb-datepicker> -->
+
+                                            <!-- <ng-template #t let-date="date" let-focused="focused">
+                                            <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                                                [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                                                (mouseleave)="hoveredDate = null">
+                                                {{ date.day }}
+                                            </span>
+                                        </ng-template> -->
+
+                                            <ng-template #t let-date="date" let-focused="focused">
+                                                <span class="custom-day" [class.focused]="focused" [class.range]="isFrom(date) || isTo(date) || isInside(date) || isHovered(date)"
+                                                    [class.faded]="isHovered(date) || isInside(date)" (mouseenter)="hoveredDate = date"
+                                                    (mouseleave)="hoveredDate = null">
+                                                    {{ date.day }}
+                                                </span>
+                                            </ng-template>
+
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row">
+                                                <div class="col-md-6 mt-3 mt-md-0 pl-0 text-center">
+                                                    <a (click)="openAddReort()" class="btn btn-primary">
+                                                        <i class="icon-edit text-white mr-2"></i>
+                                                        {{ 'commons.buttons.add' | translate }}
+                                                    </a>
+                                                </div>
+                                                <div *ngIf="!enableEdit" class="col-md-6 mt-3 mt-md-0 text-center"
+                                                    (click)="enableEdit = true">
+                                                    <a class="btn btn-primary">
+                                                        <i class="icon-edit text-white mr-2"></i>
+                                                        {{ 'commons.buttons.edit' | translate }}
+                                                    </a>
+                                                </div>
+                                                <div *ngIf="enableEdit" class="col-md-6 mt-3 mt-md-0  text-center"
+                                                    (click)="enableEdit = false">
+                                                    <a class="btn">
+                                                        <i class="text-white mr-2"></i>
+                                                        {{ 'commons.buttons.cancel' | translate }}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!--Table Starts-->
+                                    <div class="table-responsive mt-4" *ngIf="!isVisible">
+                                        <table class="table table-striped" *ngIf="reports">
+                                            <thead>
+                                                <tr>
+                                                    <th class="col-30">{{ 'project.reportName' | translate }}</th>
+                                                    <th class="col-15">{{ 'project.dateRange' | translate }}</th>
+                                                    <th class="col-20">{{ 'project.size' | translate }}</th>
+                                                    <th class="col-30 pl-0">{{ 'project.action' | translate }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let report of reportsItem">
+                                                    <td>
+                                                        <i class="icon-Report table-icon"></i>{{report.name}}
+                                                    </td>
+                                                    <td>{{report.from_date | date}} - {{report.to_date | date}}</td>
+                                                    <td>{{report.size}}</td>
+                                                    <td class="pl-0" *ngIf="!enableEdit">
+                                                        <a target="_blank" href="{{baseUrl}}/{{report.file}}" class="btn">
+                                                            <span class="icon-Search"></span>
+                                                            {{ 'commons.buttons.view' | translate }}
+                                                        </a>
+                                                        <a (click)="downloadReport(report.id, report.file)" class="btn ml-0 ml-md-4 mt-2 mt-md-0 btn-ml-0"
+                                                            download>
+                                                            <span class="icon-Download"></span>
+                                                            {{ 'commons.buttons.download' | translate }}
+                                                        </a> <!-- href="{{baseUrl}}/{{report.file}}" -->
+                                                    </td>
+                                                    <td class="pl-0" *ngIf="enableEdit">
+                                                        <a (click)="editReport(report)" class="btn">
+                                                            <span class="icon-edit"></span>
+                                                            {{ 'commons.buttons.edit' | translate }}
+                                                        </a>
+                                                        <a (click)="deleteReport(report,projectDetails)" class="btn ml-0 ml-md-4 mt-2 mt-md-0 btn-ml-0">
+                                                            <span class="icon-delete"></span>
+                                                            {{ 'commons.buttons.delete' | translate }}
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <div *ngIf="!reports">
+                                            {{ 'commons.message.noReport' | translate }}
+                                        </div>
+                                    </div>
+                                    <!--Table ends-->
+
+                                    <div class="row mt-2 table-footer" *ngIf="reports && !isVisible">
+                                        <div class="col-md-7 d-flex align-items-center">
+                                            <p>Page {{pager.currentPage}} of {{pager.totalPages}}</p>
+                                        </div>
+                                        <div class="col-md-5 text-right">
+                                            <div class="table-navigation">
+                                                <a [ngClass]="{disabled:pager.currentPage === 1}" (click)="setPage(pager.currentPage - 1, reports)"
+                                                    class="prev">
+                                                    <i class="icon-Back"></i>
+                                                </a>
+                                                <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}"
+                                                    (click)="setPage(pager.currentPage + 1, reports)" class="next">
+                                                    <i class="icon-Next"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--report archive section-->
+                                    <div class="row" *ngIf="isVisible">
+                                        <div class="col-12">
+                                            <h1 class="heading-title mt-3">
+                                                {{ 'project.reportTitle' | translate }} -
+                                                {{ 'commons.buttons.add' | translate }}
+                                            </h1>
+                                            <form class="card-form mt-4" method="post" [formGroup]="reportForm" role="form">
+                                                <div class="messages"></div>
+                                                <div class="controls">
+                                                    <div class="row">
+                                                        <div class="col-sm-8">
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <div class="form-group">
+                                                                        <label for="date">
+                                                                            {{ 'project.title' | translate }}
+                                                                        </label>
+                                                                        <input id="title" type="text" name="title"
+                                                                            formControlName="name" class="form-control"
+                                                                            placeholder="{{ 'project.title' | translate }}">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="date">
+                                                                            {{ 'project.fromDate' | translate }}
+                                                                        </label>
+                                                                        <input class="form-control" id="datefrom"
+                                                                            placeholder="DD.MM.YYYY" name="dp"
+                                                                            [(ngModel)]="fromDateModel" ngbDatepicker
+                                                                            #d1="ngbDatepicker" formControlName="from_date"
+                                                                            (dateSelect)="onDateSelect($event)" (click)="d1.toggle();$event.stopPropagation();"
+                                                                            (document:click)="d1.close()">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="form-group">
+                                                                        <label for="date">
+                                                                            {{ 'project.toDate' | translate }}
+                                                                        </label>
+                                                                        <input class="form-control" placeholder="DD.MM.YYYY"
+                                                                            id="dateto" name="dp" [(ngModel)]="toDateModel"
+                                                                            ngbDatepicker #d2="ngbDatepicker"
+                                                                            formControlName="to_date" (dateSelect)="onDateSelect($event)"
+                                                                            (click)="d2.toggle();$event.stopPropagation();"
+                                                                            (document:click)="d2.close()">
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            <div class="form-group bg-grey upload-box p-4 p-xl-5">
+                                                                <div class="row">
+                                                                    <div class="col-md-4 text-center d-flex align-items-center justify-content-center">
+                                                                        <img src="assets/images/upload-icon.png" />
+                                                                    </div>
+                                                                    <div class="col-md-8 text-center">
+                                                                        <h5 class="text-grey mb-2">Drag and drop file
+                                                                        </h5>
+                                                                        <h6 class="text-grey mt-2 text-normal">or</h6>
+                                                                        <div class="report-upload text-center">
+                                                                            <span class="btn btn-primary top-btn">
+                                                                                {{'commons.titles.browse' | translate}}
+                                                                            </span>
+                                                                            <input type="file" name="file" class="report-icon"
+                                                                                (change)="onReportFileChange($event)"
+                                                                                #fileInput />
+                                                                            <div>{{file}}</div>
+                                                                            <input type="hidden" formControlName="filename">
+                                                                            <input type="hidden" formControlName="size">
+                                                                            <h5 class="report-value text-grey mt-2">
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label for="form_message">
+                                                                {{ 'project.description' | translate }}
+                                                            </label>
+                                                            <textarea id="form_message" name="Description" class="form-control"
+                                                                formControlName="short_description" placeholder="{{ 'project.description' | translate }}"
+                                                                rows="4"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12 mb-3 text-right">
+                                                        <input type="button" (click)="isVisible = false" class="btn mr-3"
+                                                            value="Cancel">
+                                                        <input type="submit" *ngIf="disableUpdate" (click)="submitReport(projectDetails)"
+                                                            class="btn btn-primary" value="Add">
+                                                        <input type="submit" *ngIf="!disableUpdate" (click)="updateReport(reportId,projectDetails.id)"
+                                                            class="btn btn-primary" value="Update">
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--card-body ends-->
+                            </div>
+
+
+                            <div class="row">
+
+                                <!-- Members Section -->
+                                <div class="col-md-7">
+                                    <div class="card card-shadow search-wrapper">
+                                        <div class="card-body">
+                                            <!--card-body starts-->
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <h1 class="heading-title">
+                                                        {{ 'commons.titles.members' | translate }}
+                                                        <span class="light-blue-bg count ml-3">
+                                                            {{ memberCount }}
+                                                        </span>
+                                                    </h1>
+                                                </div>
+                                                <div class="col-4 text-right" [ngClass]="memberEdit === false">
+                                                    <a *ngIf="!editMemberList" (click)="editMemberList = !editMemberList"
+                                                        class="btn btn-primary">
+                                                        <i class="icon-edit text-white mr-2"></i>
+                                                        {{ 'commons.buttons.edit' | translate }}
+                                                    </a>
+                                                    <a *ngIf="editMemberList" (click)="editMemberList = !editMemberList"
+                                                        class="btn">
+                                                        <i class="text-white mr-2"></i>
+                                                        {{ 'commons.buttons.cancel' | translate }}
+                                                    </a>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12 member-search p-0" *ngIf="editMemberList"
+                                                (clickOutside)="searchValue = false">
+                                                <input type="text" placeholder="Search" class="search-input" (click)="onKey($event)"
+                                                    (keyup)="onKey($event)">
+                                                <div class="search-box" *ngIf="editMemberList && searchValue">
+                                                    <div>
+                                                        <div style="float:left" *ngFor="let member of selectedMembers"
+                                                            class="search-output">
+                                                            <img [src]="member.member.image ? baseUrl +'/'+member.member.image : 'assets/images/user-default.png'"
+                                                                width="50" height="50" class="member-profile-small" />
+                                                            <br>{{ member.member.first_name }}&nbsp;{{
+                                                            member.member.last_name }} <span class="pointer" (click)="removeMemberFromProject(member, projectDetails.id)">x</span>
+                                                        </div>
+                                                    </div>
+                                                    <div style="clear: both;" class="table-small" *ngIf="filterMembers.length>0">
+                                                        <table class="table">
+                                                            <tr *ngFor="let eachMember of filterMembers">
+                                                                <td class="pl-0">
+                                                                    <img [src]="eachMember.image ? baseUrl+'/'+eachMember.image : 'assets/images/user-default.png'"
+                                                                        width="50" height="50" class="member-profile-small" />
+                                                                </td>
+                                                                <td>
+                                                                    {{ eachMember.first_name }}&nbsp;
+                                                                    {{ eachMember.last_name }}
+                                                                </td>
+                                                                <td *ngIf="allProjectMembers.indexOf(eachMember.id) === -1">
+                                                                    <input type="text" class="member-input" [(ngModel)]="memPosition[eachMember.id]">
+                                                                </td>
+                                                                <td *ngIf="allProjectMembers.indexOf(eachMember.id) > -1">
+                                                                    <span *ngFor="let selectedMem of selectedMembers">
+                                                                        <span *ngIf="selectedMem.member.id === eachMember.id">
+                                                                            {{selectedMem.member_position |
+                                                                            uppercasefirst}}
+                                                                        </span>
+                                                                    </span>
+                                                                </td>
+                                                                <td class="text-right">
+                                                                    <button *ngIf="allProjectMembers.indexOf(eachMember.id) === -1"
+                                                                        (click)="addMemToProject(eachMember,projectDetails)"
+                                                                        class="btn btn-primary">
+                                                                        {{ 'commons.buttons.add' | translate }}
+                                                                    </button>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <div style="clear: both;" class="table-small" *ngIf="filterMembers.length === 0">
+                                                        {{ 'commons.message.noResult' | translate }}
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--Table Starts-->
+                                            <div class="table-responsive mt-2" *ngFor="let key of memberPosKeys; let i = index">
+                                                <a class="btn-grey btn-info my-4">{{key | uppercasefirst}}</a>
+
+                                                <div class="table-small">
+                                                    <table class="table">
+                                                        <tbody>
+                                                            <tr *ngFor="let member of memberList[key]">
+                                                                <td style="width: 60px;">
+                                                                    <img [src]="member.member.image ? baseUrl +'/'+member.member.image : 'assets/images/user-default.png'"
+                                                                        class="member-profile-small" />
+                                                                </td>
+                                                                <td style="width: 200px;">
+                                                                    {{ member.member.first_name }}&nbsp;
+                                                                    {{ member.member.last_name }}
+                                                                </td>
+                                                                <td class="text-grey" style="width: 150px; text-align: left;">
+                                                                    {{ member.member_position | uppercasefirst}}
+                                                                </td>
+                                                                <td class="text-right" style="width: 150px;">
+                                                                    <a (click)="(editMemberList) ? removeMemberFromProject(member, projectDetails.id) : ''"
+                                                                        [ngClass]="{'btn btn-delete': editMemberList === true}">
+                                                                        <i [ngClass]="{'icon-delete mr-3': editMemberList === true}"></i>
+                                                                        {{ (editMemberList) ?
+                                                                        ('commons.buttons.remove' | translate ) : ''}}
+                                                                    </a>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <hr *ngIf="memberPosKeys.length - 1 > i " class="m-0">
+                                            </div>
+                                            <!--Table ends-->
+                                        </div>
+                                        <!-- card - body ends -->
+                                    </div>
+                                </div>
+
+                                <!-- Asset Code -->
+                                <div class="col-md-5">
+                                    <div class="card card-shadow">
+                                        <div class="card-body row">
+                                            <!--card-body starts-->
+                                            <div class="col-8">
+                                                <h1 class="heading-title">Assets</h1>
+                                            </div>
+                                            <div class="col-4 text-right">
+                                                <a (click)="editAsset = true" *ngIf="!editAsset" class="btn btn-primary">
+                                                    <i class="icon-edit text-white mr-2"></i>
+                                                    Edit
+                                                </a>
+                                                <a (click)="editAsset = false" *ngIf="editAsset" class="btn btn-primary">
+                                                    <i class="text-white mr-2"></i>
+                                                    Cancel
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12 p-0">
+                                                <!--Table Starts-->
+                                                <div class="mt-4" (clickOutside)="close()">
+                                                    <p class="create-link" *ngIf="editAsset" (click)="new = true">
+                                                        <a class="pointer">
+                                                            <i class="icon-add mr-3 ml-2"></i>Create New
+                                                        </a>
+                                                    </p>
+
+                                                    <!--Create Folder list Starts-->
+                                                    <div class="card card-shadow create-box px-5 float-folder" *ngIf="editAsset && new">
+                                                        <p class="my-3" (click)="newFolder = true">
+                                                            <a class="pointer">
+                                                                <i class="indicator icon-Asset-icon1 mr-4"></i>
+                                                                Create New Folder
+                                                            </a>
+                                                        </p>
+                                                        <p class="my-3" (click)="newFile = true">
+                                                            <a class="pointer">
+                                                                <i class="indicator icon-Asset-icon1 mr-4"></i>
+                                                                Upload files
+                                                            </a>
+                                                        </p>
+                                                    </div>
+                                                    <!--Create Folder list End-->
+
+                                                    <!--Create Folder Starts-->
+                                                    <div class="card card-shadow px-5 folder-box float-folder" *ngIf="editAsset && newFolder">
+                                                        <h1 class="heading-title mb-5">Create New Folder</h1>
+                                                        <p class="create-heading d-flex align-items-center">
+                                                            <i class="indicator icon-Asset-icon1 mr-4"></i>
+                                                            <input type="text" class="text-blue create-input"
+                                                                [(ngModel)]="folderName" />
+                                                            <!-- <span class="text-blue">Treecoin Assets</span> -->
+                                                        </p>
+                                                        <p class="text-right mt-5 text-uppercase">
+                                                            <a href="#" (click)="newFolder = false" class="text-blue mr-5">Cancel</a>
+                                                            <a (click)="createFolder(projectDetails.id)" class="text-light-blue pointer">Create</a>
+                                                        </p>
+                                                    </div>
+                                                    <!--Create Folder End-->
+
+                                                    <!--Open Folder Starts-->
+                                                    <div class="card card-shadow px-5 upload-folder-box float-folder"
+                                                        *ngIf="editAsset && newFile">
+                                                        <h1 class="heading-title mb-5">Upload files</h1>
+                                                        <p class="create-heading d-flex align-items-center">
+                                                            <i class="indicator  icon-Asset-icon1 mr-4"></i>
+                                                            <select class="create-dropdown text-blue" [(ngModel)]="selectedFolder">
+                                                                <option *ngFor="let folder of folders">{{ folder }}</option>
+                                                            </select>
+                                                        </p>
+
+                                                        <div class="mfile-upload dropdown-item mt-5 text-center">
+                                                            <p class="text-center mb-1 mfile">
+                                                                <span class="mfile-selected"></span>
+                                                                files selected
+                                                            </p>
+                                                            <span class="btn btn-primary btn-large py-2">
+                                                                Select files
+                                                            </span>
+                                                            <input type="file" name="file" class="minput-files"
+                                                                multiple="" (change)="onMultiFileChange($event)" accept=".jpg,.jpeg,.png,.pdf"
+                                                                #fileInput>
+                                                        </div>
+
+                                                        <p class="text-right mt-5 text-uppercase btn-links">
+                                                            <a (click)="newFile = false" class="text-blue mr-5 pointer">Cancel</a>
+                                                            <a (click)="uploadAssets(projectDetails)" class="text-light-blue pointer">Upload</a>
+                                                        </p>
+                                                    </div>
+                                                    <!--Open Folder End-->
+
+                                                    <ul id="treeview" *ngIf="!assetsMessage">
+                                                        <li *ngFor="let folder of folders">{{folder}}
+                                                            <ul>
+                                                                <li *ngFor="let ffile of folderData[folder]; let p = index">
+                                                                    <div class="col-md-12">{{ffile.name}}
+                                                                        <p class="asset-info">
+                                                                            {{ffile.size}} | {{ffile.time | date}}
+                                                                            <span (click)="deleteFile(ffile,p, projectDetails)"
+                                                                                *ngIf="editAsset" style="margin-left:25px;"
+                                                                                class="icon-delete pointer delete-icon"></span>
+                                                                        </p>
+                                                                    </div>
+                                                                </li>
+                                                            </ul>
+                                                        </li>
+
+                                                        <li *ngFor="let file of fileData; let c = index">
+                                                            <a>
+                                                                <div class="col-md-12">{{file.name}}
+                                                                    <p class="asset-info">
+                                                                        {{file.size}} | {{file.time | date}}
+                                                                        <span (click)="deleteFile(file, c, projectDetails)"
+                                                                            *ngIf="editAsset" style="margin-left:25px;"
+                                                                            class="icon-delete pointer delete-icon"></span>
+                                                                    </p>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+
+                                                    <ul *ngIf="assetsMessage">
+                                                        {{ assetsMessage }}
+                                                    </ul>
+                                                </div>
+                                                <!--Table ends-->
+                                            </div>
+                                        </div>
+                                        <!--card-body ends-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--table - wrapper ends-->
+                    </div>
+                    <!--card - body ends-->
+                </div>
+            </div>
+            <!--box - wrapper ends-->
+        </div>
+        <!--main-wrapper ends-->
+    </div>
+</div>
+
+
+<ng-template #imageCropper let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <h2 class="main-title text-center mb-4">
+            {{ 'commons.titles.imgCrop' | translate}}
+        </h2>
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
+            [resizeToWidth]="256" [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false" format="png"
+            outputType="base64" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()" [style.display]="showCropper ? null : 'none'"></image-cropper>
+
+        <div class="form-group row mt-5">
+            <div class="col-md-6">
+                <button type="button" class="btn right" (click)="d('Cancel')">
+                    {{ 'commons.buttons.cancel' | translate }}
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary" (click)="c('Save')">
+                    {{ 'commons.buttons.save' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,0 +1,227 @@
+<ng-progress [positionUsing]="'marginLeft'" [minimum]="0.15" [maximum]="1" [speed]="200" [showSpinner]="false"
+    [direction]="'leftToRightIncreased'" [color]="'#ADC734'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'"></ng-progress>
+<div class="row">
+    <div class="col-md-9 col-lg-9 px-3 bg-white full-height">
+
+        <div class="card bg-info mt-0">
+            <div class="row">
+                <div class="main-heading col-md-12 col-12 right-filter">
+                    <h1 class="heading-title d-inline">{{ 'dashboard.chooseProject' | translate }}</h1>
+                    <ul>
+                        <li><a href="#">
+                                <img src="assets/images/footer-logo.png" alt="TreeCoin" />
+                            </a></li>
+                        <li><a href="#">
+                                <img src="assets/images/IamOn.png" alt="IamOn" />
+                            </a></li>
+                        <li><a href="#">
+                                <img src="assets/images/Atreides.png" alt="Atreides" />
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-wrapper pb-2">
+            <!--main-wrapper starts-->
+            <div class="box-wrapper">
+                <!--box-wrapper starts-->
+                <div class="card card-shadow p-0">
+                    <div class="card-body">
+                        <textarea id="editor">Write something . . </textarea>
+                        <button class="btn btn-primary btn-editor">{{ 'commons.buttons.post' | translate }}</button>
+                    </div>
+                    <!--card-body ends-->
+                </div>
+                <!--1st card starts-->
+                <div class="card card-shadow project-list-box">
+                    <div class="card-body p-3">
+                        <div class="row d-flex align-items-center border-bottom pb-4">
+                            <div class="col-md-1 pl-0"><img src="assets/images/profile-img.jpg" alt="profile" title="profile"
+                                    class="circle-img"></div>
+                            <div class="col-md-10">
+                                <h5 class="text-blue font-weight-normal mb-2">John Doe</h5>
+                                <h6 class="text-grey font-weight-normal mb-0">johndoe@gmail.com</h6>
+                            </div>
+                            <div class="col-md-1 text-right pr-0">
+                                <h6 class="text-grey font-weight-normal"><img src="assets/images/footer-logo.png" alt="TreeCoin"
+                                        class="small-img">
+                                    10 min</h6>
+                            </div>
+                        </div>
+                        <div class="row project-desc pt-4">
+                            <div class="col-md-12 p-0">
+                                <p>Atqui reperies, inquit, in hoc quidem pertinacem praeclare hoc quidem. Quis
+                                    Aristidem non mortuum diligit. Zenonis est, inquam, hoc Stoici. Sed ego in
+                                    hoc resisto. Quo modo autem philosophus loquitur.</p>
+                                <p>Haec paradoca nos admirabilia dicamus. Solum praeterea formosum, solum
+                                    liberum, solum civem, stultost Sed haec omittamus.</p>
+                                <p class="attachment-row text-grey my-4"><span class="attachemnt-count"><i class="icon-Bell mr-2"></i>1
+                                        attachment</span></p>
+                            </div>
+                        </div>
+                        <div class="row pdf-row pt-2">
+                            <div class="col-md-4 pdf-grid">
+                                <div class="row align-items-center">
+                                    <div class="col-1"><img src="assets/images/pdf.png" /></div>
+                                    <div class="col-9">
+                                        <h6 class="mb-2">Report.pdf</h6>
+                                        <h6 class="text-grey font-weight-normal mb-0">120.00 KB</h6>
+                                    </div>
+                                    <div class="col-2 text-center"><i class="icon-Bell text-grey mr-3"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--card-body ends-->
+                </div>
+                <!--1st card Ends-->
+
+                <!--2nd card starts-->
+                <div class="card card-shadow project-list-box">
+                    <div class="card-body p-3">
+                        <div class="row d-flex align-items-center border-bottom pb-4">
+                            <div class="col-md-1 pl-0"><img src="assets/images/profile-img.jpg" alt="profile" title="profile"
+                                    class="circle-img"></div>
+                            <div class="col-md-10">
+                                <h5 class="text-blue font-weight-normal mb-2">John Doe</h5>
+                                <h6 class="text-grey font-weight-normal mb-0">johndoe@gmail.com</h6>
+                            </div>
+                            <div class="col-md-1 text-right pr-0">
+                                <h6 class="text-grey font-weight-normal"><img src="assets/images/Infinity-Economics.png"
+                                        alt="TreeCoin" class="small-img"> 25 min</h6>
+                            </div>
+                        </div>
+                        <div class="row project-desc pt-4">
+                            <div class="col-md-12 p-0">
+                                <p>Atqui reperies, inquit, in hoc quidem pertinacem praeclare hoc quidem. Quis
+                                    Aristidem non mortuum diligit. Zenonis est, inquam, hoc Stoici. Sed ego in
+                                    hoc resisto. Quo modo autem philosophus loquitur.</p>
+                                <p>Haec paradoca nos admirabilia dicamus. Solum praeterea formosum, solum
+                                    liberum, solum civem, stultost Sed haec omittamus.</p>
+                                <p class="attachment-row text-grey my-4"><span class="attachemnt-count"><i class="icon-Bell mr-2"></i>1
+                                        attachment</span></p>
+                            </div>
+                        </div>
+                        <div class="row pdf-row pt-2">
+                            <div class="col-md-4 pdf-grid">
+                                <div class="row align-items-center">
+                                    <div class="col-1"><img src="assets/images/image.png" /></div>
+                                    <div class="col-9">
+                                        <h6 class="mb-2">Report.pdf</h6>
+                                        <h6 class="text-grey font-weight-normal mb-0">120.00 KB</h6>
+                                    </div>
+                                    <div class="col-2 text-center"><i class="icon-Bell text-grey mr-3"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--card-body ends-->
+                </div>
+                <!--2nd card Ends-->
+            </div>
+            <!--box-wrapper ends-->
+        </div>
+        <!--main-wrapper ends-->
+    </div>
+    <!--col-md-9 row ends-->
+    <div class="col-md-3 col-lg-3 d-none d-md-block pb-5 pl-4 pr-0">
+        <!--1st card starts-->
+        <div class="card card-shadow project-list-box">
+            <div class="card-body">
+                <h1 class="heading-title mb-4">{{ 'dashboard.recentActivities' | translate }}</h1>
+                <div class="activity-wrapper" *ngIf="!notificationMessage">
+                    <ul>
+                        <li class="row" *ngFor="let notification of notificationArray">
+                            <div class="col-2"><i class="icon-icon1 bg-icon-green"></i></div>
+                            <div class="col-10">{{notification.text}}
+                                <h6 class="text-grey mt-2">{{notification.time}}</h6>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="activity-wrapper text-center" *ngIf="notificationMessage">
+                    {{notificationMessage}}
+                </div>
+            </div>
+        </div>
+
+
+        <!--2nd card starts-->
+        <div class="card card-shadow mt-0 p-0 project-sidebar">
+            <div class="card-body">
+                <div class="card m-0">
+                    <div class="row">
+                        <div class="col-6" *ngIf="projectMessage">
+                            <h1 class="heading-title mb-0">
+                                {{ 'dashboard.project' | translate }}
+                            </h1>
+                        </div>
+                        <div class="col-12 heading-title mb-0" *ngIf="!projectMessage">
+                            <!-- <img src="assets/images/footer-logo.png" alt="TreeCoin" class="small-img"> -->
+                            <select *ngIf="projectArray?.length > 0" [(ngModel)]="projectId" (ngModelChange)="seletedProject(projectId)"
+                                class="dropdown dropdown-project col-12">
+                                <option *ngFor="let project of projectArray" [value]="project.id">
+                                    {{project.name}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="project-sidebar-wrapper" *ngIf="!projectMessage">
+                    <div class="row text-center m-0">
+                        <div class="col-6">
+                            <i class="icon-Project-Report text-green"></i>
+                            <h3 class="text-semibold text-blue">{{reportCount}}</h3>
+                            <h6 class="text-grey mt-2 text-normal">Reports</h6>
+                        </div>
+                        <div class="col-6 bg-grey">
+                            <i class="icon-Project-Member text-green"></i>
+                            <h3 class="text-semibold text-blue">{{memberCount}}</h3>
+                            <h6 class="text-grey mt-2 text-normal">Members</h6>
+                        </div>
+                        <div class="col-6 bg-grey">
+                            <i class="icon-Project-Notification text-green"></i>
+                            <h3 class="text-semibold text-blue">{{notificationCount}}</h3>
+                            <h6 class="text-grey mt-2 text-normal">Notification</h6>
+                        </div>
+                        <div class="col-6">
+                            <i class="icon-Project-Duration text-green"></i>
+                            <h3 class="text-semibold text-blue">{{duration}}</h3>
+                            <h6 class="text-grey mt-2 text-normal">Duration</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-sidebar-wrapper pb-5" *ngIf="projectMessage">
+                    <div class="row text-center m-0">
+                        <div class="col-12">
+                            {{projectMessage}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--card-body ends-->
+        </div>
+        <!--2nd card Ends-->
+
+        <!--3rd card starts-->
+        <div class="card card-shadow mt-0">
+            <div class="card-body">
+                <h1 class="heading-title mb-4">
+                    {{ 'dashboard.reminder' | translate }}
+                </h1>
+                <div class="info" *ngFor="let todo of todoArray, let i = index" [ngClass]="{'info-bg-yellow': i % 2 == 1}">
+                    <p>{{todo.details}}</p>
+                </div>
+                <div class="text-center" *ngIf="todoMessage">
+                    {{todoMessage}}
+                </div>
+            </div>
+            <!--card-body ends-->
+        </div>
+        <!--3rd card Ends-->
+
+        <!--card-body ends-->
+    </div>
+</div>

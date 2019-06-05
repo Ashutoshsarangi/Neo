@@ -1,0 +1,95 @@
+<div class="collapse" id="collapseOrder" style="margin: 15px">
+    <div class="card card-body">
+        <div class="row">
+            <div class="form-group col-4">
+                <label for="productName">Product</label>
+                <select id="productName" class="form-control" [(ngModel)]="orderInput.productid">
+                    <option selected value="NA">Select One</option>
+                    <option *ngFor="let product of productList" value="{{product.id}}">{{product.name}}</option>
+                </select>
+            </div>
+            <div class="form-group col-4">
+                <label for="customerName">Customer</label>
+                <select id="customerName" class="form-control" [(ngModel)]="orderInput.customerid">
+                    <option selected value="NA">Select One</option>
+                    <option *ngFor="let customer of customerList" value="{{customer.id}}">{{customer.name}}</option>
+                </select>
+            </div>
+            <div class="form-group col-2">
+                <label for="productQuantity">Quantity</label>
+                <input type="text" class="form-control" id="productQuantity" [(ngModel)]="orderInput.quantity" (blur)="onBlue()">
+            </div>
+            <div class="form-group col-2">
+                <label for="productAmount">Amount</label>
+                <input type="text" class="form-control" id="productAmount" [(ngModel)]="orderInput.amount" readonly>
+            </div>
+            <div class="form-group col-2">
+                <label for="productCGST">CGST</label>
+                <input type="text" class="form-control" id="productCGST" [(ngModel)]="orderInput.CGST" readonly>
+            </div>
+            <div class="form-group col-2">
+                <label for="productSGST">SGST</label>
+                <input type="text" class="form-control" id="productSGST" [(ngModel)]="orderInput.SGST" readonly>
+            </div>
+            <div class="form-group col-4">
+                <label for="productDiscount">Discount</label>
+                <input type="text" class="form-control" id="productDiscount" [(ngModel)]="orderInput.discount" readonly>
+            </div>
+            <div class="form-group col-4">
+                <label for="productAmount">Amount To Be Paid</label>
+                <input type="text" class="form-control" id="productTotalAmount" [(ngModel)]="orderInput.totalamount" readonly>
+            </div>
+            <div class="col-12" style="text-align: center">
+                <button type="button" data-toggle="collapse" data-target="#collapseOrder" aria-expanded="false" aria-controls="collapseOrder"
+                    class="btn btn-primary" (click)="placeOrder()">Place Order</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin: 15px;margin-top: 5%">
+    <div class="form-group has-search col-4">
+        <span class="searchIcon"><i class="fa fa-search"></i></span>
+        <input type="text" class="form-control filterSearch" placeholder="Search..." name="search" autocomplete="off">
+    </div>
+    <div class="col-3" data-toggle="collapse" data-target="#collapseOrder" aria-expanded="false" aria-controls="collapseOrder">
+        <a class="float"> <i class="fa fa-plus my-float"></i> </a>
+        <span style="    position: absolute; left: 41%; top: 11%;">New</span>
+    </div>
+    <div class="col-2">
+        <a class="float"> <i class="fas fa-arrow-up my-float"></i> </a>
+        <span style="    position: absolute; left: 41%; top: 11%;">Export</span>
+    </div>
+    <div class="col-12">
+        <table class="table" style="margin-top: 5%">
+            <thead style="background-color: #59d5ff; color: #ffffff;">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Order Number</th>
+                    <th scope="col">Customer Name</th>
+                    <th scope="col">Contact Number</th>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let order of orderList | paginate: { itemsPerPage: itemsPage, currentPage: p}; let i = index">
+                    <th scope="row"> {{ itemsPage * (p - 1) + i+1 }} </th>
+                    <td>{{order.orderNumber}}</td>
+                    <td>{{order.customerName}}</td>
+                    <td>{{order.contactNumber}}</td>
+                    <td>{{order.productName}}</td>
+                    <td>{{order.quantity}}</td>
+                    <td>{{order.totalAmount}}</td>
+                    <td>
+                        <!--   <span (click)="editOrder(order)"> <i class="fas fa-edit" data-toggle="collapse" 
+                        data-target="#collapseOrder" aria-expanded="false" 
+                        aria-controls="collapseOrder" style="color: green; cursor: pointer;" ></i></span>/-->
+                        <span (click)="deleteOrder(order)"><i class="fas fa-trash-alt" style="color: red; cursor: pointer;"></i></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls (pageChange)="p = $event" style="text-align: center"></pagination-controls>

@@ -1,0 +1,329 @@
+<ng-progress [positionUsing]="'marginLeft'" [minimum]="0.15" [maximum]="1" [speed]="200" [showSpinner]="false"
+    [direction]="'leftToRightIncreased'" [color]="'#ADC734'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'"></ng-progress>
+<div class="card bg-info mt-0">
+    <div class="row">
+        <div class="main-heading col-md-12 col-12 right-filter">
+            <h1 class="heading-title d-inline">{{ 'commons.titles.settings' | translate }}</h1>
+        </div>
+    </div>
+</div>
+
+<div class="main-wrapper pb-2">
+    <!--main-wrapper starts-->
+    <div class="box-wrapper">
+        <!--box-wrapper starts-->
+        <div class="card p-0" *ngIf="tab !== ''">
+            <div class="row">
+                <div class="col-md-12 col-12">
+                    <ul class="nav nav-tabs">
+                        <li class="pointer" [ngClass]="{'active': tab == 'members'}" (click)="tab = 'members'">
+                            {{ 'settings.allUser' | translate }}
+                        </li>
+                        <li class="pointer" [ngClass]="{'active': tab == 'lastLogin'}" (click)="tab = 'lastLogin'">
+                            {{ 'settings.lastLogin' | translate }}
+                        </li>
+                        <li class="pointer" [ngClass]="{'active': tab == 'activities'}" (click)="tab = 'activities'">
+                            {{ 'settings.activities' | translate }}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Add member modal-->
+        <div class="newuser-dropdown" *ngIf="tab == ''" [ngClass]="{'show': isShow, 'hide': !isShow}" (click)="closePopup($event)">
+            <div class="card card-shadow mt-5">
+                <div class="card-body">
+                    <form class="card-form" [formGroup]="memberForm">
+                        <h1 class="heading-title mb-3">
+                            {{ ((action == 'add') ? 'settings.newMember': 'settings.editMember') | translate }}
+                        </h1>
+                        <div class="row mt-4">
+                            <div class="col-3">
+                                <div class="form-group mb-0 upload-left height-100">
+                                    <input type="file" (change)="onFileChange($event, imageCropper)" onclick="value=null"
+                                        class="file" #fileInput>
+                                    <input type="hidden" class="form-control" formControlName="currentImage">
+                                    <div class="input-group col-xs-12 height-100">
+                                        <div class="input-group-btn text-center" style="width: 100%;">
+                                            <button class="browse d-flex justify-content-center height-100 flex-column align-items-center"
+                                                type="button" (click)="fileInput.click()">
+                                                <img width="120" height="120" [src]="previewImage" [ngClass]="{'rounded-circle': previewImage !=='assets/images/add-user.png'}" />
+                                                <a href="javascript:void(0)" class="btn mt-5">
+                                                    {{ 'commons.titles.browse' | translate }}</a>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control input-lg upload-input p-0" disabled
+                                            placeholder="Upload Image">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-9">
+                                <div class="row">
+                                    <div class="form-group mb-0 col-md-6">
+                                        <label>{{ 'profile.firstName' | translate }}</label>
+                                        <input type="text" class="form-control" formControlName="first_name" id="fname"
+                                            placeholder="{{ 'profile.firstName' | translate }}">
+
+                                    </div>
+                                    <div class="form-group mb-0 col-md-6">
+                                        <label>{{ 'profile.lastName' | translate }}</label>
+                                        <input type="text" class="form-control" formControlName="last_name" id="lname"
+                                            placeholder="{{ 'profile.lastName' | translate }}">
+
+                                    </div>
+                                    <div class="form-group mb-0 mt-3 col-md-6">
+                                        <label>{{ 'profile.email' | translate }}</label>
+                                        <input type="email" class="form-control" formControlName="email" id="email"
+                                            placeholder="{{ 'profile.email' | translate }}">
+
+                                    </div>
+                                    <div class="form-group mb-0 mt-3 col-md-6">
+                                        <label>{{ 'settings.jd' | translate }}</label>
+                                        <input class="form-control" formControlName="job_description" id="job_description"
+                                            placeholder="{{ 'settings.jd' | translate }}">
+                                    </div>
+                                    <div class="form-group mb-0 mt-3 col-md-6" *ngIf="passwordShow == true">
+                                        <label>{{ 'commons.titles.password' | translate }}</label>
+                                        <input type="password" class="form-control" formControlName="password" id="password"
+                                            placeholder="{{ 'commons.titles.password' | translate }}">
+                                    </div>
+                                    <div class="form-group mb-0 mt-3 col-md-6" *ngIf="passwordShow == true">
+                                        <label>{{ 'commons.changePassword.confirmPass' | translate }}</label>
+                                        <input type="password" class="form-control" formControlName="confirm_password"
+                                            id="cnf_password" placeholder="{{ 'commons.titles.password' | translate }}">
+                                    </div>
+
+                                    <!-- <div class="form-group mt-3  mb-0 col-md-6">
+                                        <label>Phone</label>
+                                        <input type="text" class="form-control" formControlName="phone" id="phone"
+                                            placeholder="Phone">
+                                    </div> -->
+                                    <div class="form-group mb-0 mt-3 col-md-6">
+                                        <label>{{ 'settings.role' | translate }}</label>
+                                        <select class="form-control dropdown" id="role" formControlName="roleId">
+                                            <option *ngFor="let role of roleArray" [value]="role.id">{{ role.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group col-md-12 mt-3 mb-0">
+                                        <label *ngIf="action == 'update'">{{ 'commons.titles.password' | translate }}:
+                                            <a href="" class="ml-3 text-underline" data-toggle="modal" (click)="openChangePassForm(changePassword)">
+                                                {{ 'commons.changePassword.title' | translate }}
+                                            </a>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-12 text-right">
+                                <a href="javascript:void(0)" (click)="visibleMemberForm(false,'add')" id="cancel" class="btn mr-3">
+                                    {{ 'commons.buttons.cancel' | translate }}
+                                </a>
+                                <button *ngIf="action == 'add'" (click)="submitForm()" type="submit" class="btn btn-primary">
+                                    {{ 'commons.buttons.add' | translate }}
+                                </button>
+                                <button *ngIf="action == 'update'" (click)="updateMember(memberDetails.id)" class="btn btn-primary">
+                                    {{ 'commons.buttons.update' | translate }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- modal ends-->
+
+        <!-- The Change Password Modal -->
+        <ng-template #changePassword let-c="close" let-d="dismiss">
+
+            <!-- Modal body -->
+            <div class="modal-body p-5">
+                <h2 class="main-title text-center mb-4">{{ 'commons.changePassword.title' | translate }}</h2>
+                <form [formGroup]="changePasswordForm">
+                    <div class="form-group" *ngIf="!isAdmin">
+                        <label for="pwd">{{ 'commons.changePassword.oldPass' | translate }}</label>
+                        <input type="password" formControlName="old_password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">{{ 'commons.changePassword.newPass' | translate }}</label>
+                        <input type="password" formControlName="new_password" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">{{ 'commons.changePassword.confirmPass' | translate }}</label>
+                        <input type="password" formControlName="confirm_new_password" class="form-control">
+                    </div>
+                    <div class="form-group row mt-5">
+                        <div class="col-md-6">
+                            <button type="button" class="btn right" (click)="d('Cancel')">
+                                {{ 'commons.buttons.cancel' | translate }}
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" (click)="changePass(memberDetails.id)" class="btn btn-primary">
+                                {{ 'commons.buttons.save' | translate }}
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </ng-template>
+
+        <!--1st card starts-->
+        <div *ngIf="tab !== ''" class="card card-shadow mt-5 tab-content p-0 newuser-hide">
+            <div class="row">
+                <!--First tab -->
+                <div *ngIf="tab === 'members'" style="list-style:none" class="col">
+                    <!--Table Starts-->
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <tbody>
+                                <tr *ngFor="let member of memberItems">
+                                    <td class="col-10 text-center">
+                                        <img class="cicle-medium-img" [src]="member.image ? nodeBaseUrl+'/'+member.image : 'assets/images/user-default.png'" />
+                                    </td>
+                                    <td class="col-40">
+                                        <h5 class="mb-1 title">{{ member.first_name }}&nbsp;{{ member.last_name }}</h5>
+                                        <p class="text-grey mb-0">{{ member.email }}</p>
+                                    </td>
+                                    <td class="col-20">
+                                        <p class="mb-0">{{ member.role.name }}</p>
+                                    </td>
+                                    <td class="text-right class-30">
+                                        <a class="btn mr-4" (click)="getMember(member.id)">
+                                            <span class="icon-edit mr-3"></span>
+                                            {{ 'commons.buttons.edit' | translate }}
+                                        </a>
+                                        <a *ngIf="sessionDetails.id !== member.id" class="btn btn-delete mr-4" (click)="removeMember(member.id)">
+                                            <span class="icon-delete mr-3"></span>
+                                            {{ 'commons.buttons.remove' | translate }}
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Table ends-->
+
+                    <div class="row mt-2 table-footer px-5 py-4">
+                        <div class="col-md-7 d-flex align-items-center text-small-center">
+                            <p>Page {{memberPager.currentPage}} of {{memberPager.totalPages}}</p>
+                        </div>
+                        <div class="col-md-5 text-right text-small-center">
+                            <div class="table-navigation">
+                                <a [ngClass]="{disabled:memberPager.currentPage === 1}" (click)="setPage(memberPager.currentPage - 1, memberArray, 'allMember')"
+                                    class="prev">
+                                    <i class="icon-Back"></i>
+                                </a>
+                                <a [ngClass]="{disabled:memberPager.currentPage === memberPager.totalPages}" (click)="setPage(memberPager.currentPage + 1, memberArray, 'allMember')"
+                                    class="next">
+                                    <i class="icon-Next"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--First End-->
+
+                <div *ngIf="tab === 'lastLogin'" style="list-style:none" class="col">
+                    <!--Table Starts-->
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <tbody>
+                                <tr *ngFor="let member of lastLoginItems">
+                                    <td class="col-10 text-center">
+                                        <img class="cicle-medium-img" [src]="member.image ? nodeBaseUrl+'/'+member.image : 'assets/images/user-default.png'" />
+                                    </td>
+                                    <td class="col-40">
+                                        <h5 class="mb-1 title">{{ member.first_name }}&nbsp;{{ member.last_name }}</h5>
+                                        <p class="text-grey mb-0">{{ member.email }}</p>
+                                    </td>
+                                    <td class="col-20">
+                                        <p class="mb-0">{{ member.role.name }}</p>
+                                    </td>
+                                    <td class="text-center col-30">
+                                        <p class="mb-0">{{ member?.last_login ? (member?.last_login |
+                                            date:'medium') : "No Login" }}</p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Table ends-->
+
+                    <div class="row mt-2 table-footer px-5 py-4">
+                        <div class="col-md-7 d-flex align-items-center text-small-center">
+                            <p>Page {{lastLoginPager.currentPage}} of {{lastLoginPager.totalPages}}</p>
+                        </div>
+                        <div class="col-md-5 text-right text-small-center">
+                            <div class="table-navigation">
+                                <a [ngClass]="{disabled:lastLoginPager.currentPage === 1}" (click)="setPage(lastLoginPager.currentPage - 1, memberArray, 'lastLogin')"
+                                    class="prev">
+                                    <i class="icon-Back"></i>
+                                </a>
+                                <a [ngClass]="{disabled:lastLoginPager.currentPage === lastLoginPager.totalPages}"
+                                    (click)="setPage(lastLoginPager.currentPage + 1, memberArray, 'lastLogin')" class="next">
+                                    <i class="icon-Next"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div *ngIf="tab === 'activities'" style="list-style:none" class="col">
+                    <ul class="newsfeed activity-feed m-4 m-md-5" *ngIf="!notificationMessage">
+                        <li class="icon-icon1 bg-icon-green" *ngFor="let notification of notificationArray">
+                            <div class="row">
+                                <div class="col-md-2 col-xl-1 text-center">
+                                    <img class="cicle-medium-img" src="assets/images/profile-img.jpg" />
+                                </div>
+                                <div class="col-md-10">
+                                    <h5 class="text-grey">{{ notification.notification_type.name }}</h5>
+                                    <p class="post-meta">{{ notification.time }}</p>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <div class="m-4 m-md-5" *ngIf="notificationMessage">{{notificationMessage}}</div>
+                </div>
+            </div>
+            <!--card-body ends-->
+        </div>
+
+        <div class="row" *ngIf="tab == 'members'">
+            <div class="col-md-12 col-12 text-right">
+                <h5 class="text-grey font-weight-normal mb-0 add-link">
+                    <span class="pointer" (click)="visibleMemberForm(true,'add')">
+                        {{ 'settings.newMember' | translate }} <i class="add-btn icon-add ml-2 pointer"></i>
+                    </span>
+                </h5>
+
+            </div>
+        </div>
+        <!--1st card Ends-->
+    </div>
+    <!--box-wrapper ends-->
+</div>
+<!--main-wrapper ends-->
+
+<ng-template #imageCropper let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <h2 class="main-title text-center mb-4">{{ 'commons.titles.imgCrop' | translate }}</h2>
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
+            [resizeToWidth]="256" [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false" format="png"
+            outputType="base64" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()" [style.display]="showCropper ? null : 'none'"></image-cropper>
+
+        <div class="form-group row mt-5">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-info right" (click)="d('Cancel')">
+                    {{ 'commons.buttons.cancel' | translate }}
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary" (click)="c('Save')">
+                    {{ 'commons.buttons.save' | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>

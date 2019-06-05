@@ -1,0 +1,22 @@
+<ul class="nav flex-column">
+    <li class="nav-item" *ngIf="showDash == true">
+        <a class="nav-link pointer" [ngClass]="isActive == 'dashboard'? 'active':''" (click)="navLink('admin','dashboard','')">
+            <img src="assets/images/dashboard.png" alt="Dashboard" />{{ 'sidebar.dashboard' | translate }}
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link pointer" [ngClass]="isActive == 'newsfeed'? 'active':''" (click)="navLink('dashboard','newsfeed','')">
+            <i class="icon-Newsfeed"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span
+                    class="path4"></span><span class="path5"></span></i>{{ 'sidebar.newsfeed' | translate }}
+            <span class="count ml-3">2</span>
+        </a>
+    </li>
+
+    <li class="nav-item" *ngFor="let project of projectList">
+        <a class="nav-link pointer" [ngClass]="(isActive === project.name) ? 'active' : '' " (click)="navLink('',project.name, project.id)">
+            <img src="{{baseURL}}/{{project.image}}" alt="{{project.name}}" />{{project.name | translate}}
+        </a>
+    </li>
+</ul>
+<a *ngIf="userInfo.role.name === 'Administrator'" (click)="setRedirect()" class="side-btn pointer"><img src="assets/images/menu-icon.png"
+        class="mr-3" alt="Dashboard" />{{ 'commons.titles.addProject' | translate }}</a>

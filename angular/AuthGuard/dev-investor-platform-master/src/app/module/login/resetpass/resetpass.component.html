@@ -1,0 +1,56 @@
+<ng-progress [positionUsing]="'marginLeft'" [minimum]="0.15" [maximum]="1" [speed]="200" [showSpinner]="false"
+    [direction]="'leftToRightIncreased'" [color]="'#ADC734'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'">
+</ng-progress>
+<div class="login-bg">
+    <div class="container">
+        <div class="row height-full align-items-center">
+            <div class="col-12">
+                <div class="card card-shadow p-3 p-md-4 p-lg-5">
+                    <div class="card-body p-3">
+                        <div class="row" *ngIf="showMsg">
+                            <div class="col-xs-12">
+                                <p class="alert alert-success">
+                                    {{ 'resetPassword.passwordSuccess' |  translate }}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row login-wrapper">
+                            <div class="col-md-6 col-xl-5 login-left">
+                                <h2 class="mb-4 mt-2 font-weight-light text-blue">
+                                    {{ 'commons.changePassword.title' |  translate }}
+                                </h2>
+                                <form class="inner-form" [formGroup]="changePasswordForm">
+                                    <div class="form-group">
+                                        <label>{{ 'commons.changePassword.newPass' |  translate }}</label>
+                                        <input class="form-control" type="password" name="password"
+                                            formControlName="new_password"
+                                            placeholder="{{ 'commons.changePassword.newPass' | translate }}" required>
+                                        <span class="focus-border"><i></i></span>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>{{ 'commons.changePassword.confirmPass' |  translate }}</label>
+                                        <input class="form-control" type="password" name="confirm_password"
+                                            formControlName="confirm_new_password"
+                                            placeholder="{{ 'commons.changePassword.confirmPass' | translate }}"
+                                            required>
+                                        <span class="focus-border"><i></i></span>
+                                    </div>
+
+                                    <div class="col-md-12 pl-0 pr-0 my-4">
+                                        <button type="submit" class="btn-submit btn btn-primary mx-auto"
+                                            (click)="changepassword()">{{ 'commons.buttons.save' |  translate }}</button>
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="col-md-6 col-xl-7 login-right">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

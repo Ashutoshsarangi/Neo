@@ -1,0 +1,41 @@
+{
+    "welcome": {
+        "title": "Melden Sie sich bei Newsportal an",
+        "username": "Nutzername",
+        "password": "Passwort",
+        "rememberMe": "Erinnere dich an mich",
+        "forgot": "Passwort vergessen?",
+        "login": "Anmeldung",
+        "notRegistered": "Noch nicht registriert?",
+        "register": "Registrieren"
+    },
+    "sidebar": {
+        "dashboard": "Instrumententafel",
+        "newsfeed": "Neuigkeiten",
+        "addProject": "Projekt hinzufügen"
+    },
+    "navbar": {
+        "settings": "die Einstellungen",
+        "profile": "Profil",
+        "logout": "Ausloggen",
+        "searchPlaceholder": "Suche"
+    },
+    "footer": {
+        "powText": "Unterstützt von",
+        "company": "Heroes Development GmbH"
+    },
+    "profile": {
+        "title": "Profil",
+        "edit": "Profil bearbeiten",
+        "firstName": "Vorname",
+        "lastName": "Nachname",
+        "email": "Email",
+        "password": "Passwort",
+        "cp": "Ändere das Passwort",
+        "cancel": "Stornieren",
+        "save": "sparen",
+        "oldPass": "Altes Passwort",
+        "newPass": "Neues Kennwort",
+        "confirmPass": "Passwort bestätigen"
+    }
+}

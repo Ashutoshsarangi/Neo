@@ -1,0 +1,82 @@
+<header>
+    <div class="row pt-4 pb-4 border-bottom">
+        <div class="col-3 col-lg-2">
+            <div class="logo text-left pl-2  pl-md-4">
+                <a (click)="redirectToMain()" class="d-md-inline-block pointer"><img src="assets/images/sidebar-logo.png"
+                        alt="Logo" class="d-none d-md-block" />
+                    <img src="assets/images/mobile-logo.png" alt="Logo" class="d-md-none" />
+                </a>
+            </div>
+        </div>
+        <div class="col-md-5 col-lg-6 d-none d-md-block">
+            <div id="header-search-input">
+                <div class="input-group">
+                    <input type="text" class="search-query form-control" placeholder="{{ 'navbar.searchPlaceholder' | translate}}" />
+                    <span class="input-group-btn">
+                        <button type="button" disabled>
+                            <span class="icon-Search"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-9 col-md-4 col-lg-4 pr-2 pr-md-4 d-flex align-items-center justify-content-end">
+            <div class="d-flex align-items-center justify-content-end">
+                <div class="notification d-flex align-items-center mr-2 mr-md-4">
+                    <a href="#" class="notify-link" data-toggle="dropdown"><i class="icon-Bell"></i></a>
+                    <div class="dropdown-menu dropdown-menu-center">
+                        <h5 class="dropdown-header">Notifications <span class="count ml-3">2</span></h5>
+                        <div class="dropdown-item unread" href="#">
+                            <div class="row">
+                                <div class="col-md-2 nav-icon pr-0"><i class="icon-Notifivation mr-3"></i></div>
+                                <div class="col-md-10 nav-text">
+                                    <p class="sub-title">New investor connected</p>
+                                    <p>1 hour ago</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-item" href="#">
+                            <div class="row">
+                                <div class="col-md-2 nav-icon pr-0"><i class="icon-Notifivation mr-3"></i></div>
+                                <div class="col-md-10 nav-text">
+                                    <p class="sub-title">12 unread updates</p>
+                                    <p>1 hour ago</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dropdown-item" href="#">
+                            <div class="row">
+                                <div class="col-md-2 nav-icon pr-0"><i class="icon-Notifivation mr-3"></i></div>
+                                <div class="col-md-10 nav-text">
+                                    <p class="sub-title">New project added</p>
+                                    <p>1 hour ago</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="dropdown-item text-center" href="#">See all activity</a>
+                    </div>
+                </div>
+                <div class="profile-info">
+                    <img src="{{userProfileImage}}" height="42" width="42" alt="profile" title="profile" class="mr-2 mr-md-4" />
+                    <span>{{fullName}}</span>
+                </div>
+                <div class="right-menu d-flex align-items-center ml-2 ml-md-4">
+                    <a href="#" class="toggle-link" data-toggle="dropdown"><i class="icon-Menu"></i></a>
+                    <div class="dropdown-menu  dropdown-menu-right">
+                        <a *ngIf="isAdmin" class="dropdown-item" href="/#/admin/settings">
+                            <p class="sub-title">
+                                <i class="icon-setting"></i>{{ 'commons.titles.settings' | translate }}
+                            </p>
+                        </a>
+                        <a class="dropdown-item" href="/#/profile">
+                            <p class="sub-title"><i class="icon-setting"></i>{{ 'commons.titles.profile' | translate }}</p>
+                        </a>
+                        <a class="dropdown-item" (click)="logout()">
+                            <p class="sub-title"><i class="icon-Logout"></i>{{ 'navbar.logout' | translate }}</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>

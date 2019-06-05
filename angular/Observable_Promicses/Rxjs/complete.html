@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Observables</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://unpkg.com/@reactivex/rxjs@5.3.0/dist/global/Rx.js"></script>
+</head>
+
+<body>
+    <!-- <button>Click me</button> -->
+</body>
+<script>
+    // var button = document.querySelector('button');
+
+    var observer = {
+        next: function (value) {
+            console.log(value);
+        },
+        error: function (error) {
+            console.log(error);
+        },
+        complete: function () {
+            console.log('Completed');
+        }
+    };
+
+    //Rx.Observable.fromEvent(button, 'click')
+    Rx.Observable.create(function (obs) {
+        obs.next('A value');
+        // obs.error('Error');
+        setTimeout(function () {
+            obs.complete();
+        }, 2000);
+        obs.next('Asecond value');
+
+    })
+        .subscribe(observer);
+</script>
+
+</html>

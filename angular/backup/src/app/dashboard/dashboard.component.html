@@ -1,0 +1,117 @@
+<div class="row" style="margin: 10px; margin-top: 3%">
+    <div class="form-group col-md-3">
+        <select id="productcategory" class="form-control">
+            <option selected value="NA">Select One</option>
+            <option *ngFor="let month of monthList" value="{{month.id}}">{{month.name}}</option>
+        </select>
+    </div>
+    <div class="form-group has-search col-3" style="position: absolute; right: 0;">
+        <span class="searchIcon"><i class="fa fa-search"></i></span>
+        <input type="text" class="form-control filterSearch" placeholder="Search..." name="search" autocomplete="off">
+    </div>
+</div>
+<div class="row" style="margin: 10px; margin-top: 3%">
+    <div class="card col-2" style="width: 18rem;background-color: aqua; margin-left: 5px">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text fontSize">853</p>
+        </div>
+    </div>
+    <div class="card col-2" style="width: 18rem;background-color: pink; margin-left: 5px">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text fontSize">₹10K</p>
+        </div>
+    </div>
+    <div class="card col-2" style="width: 18rem;background-color: orange; margin-left: 5px">
+        <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text fontSize">213</p>
+        </div>
+    </div>
+    <div class="card col-4" style="width: 18rem;background-color: rebeccapurple; margin-left: 5px">
+        <div class="card-body" style="    display: flex; flex-wrap: wrap;">
+            <h5 class="card-title">Total Purchase and Amount</h5>
+            <div>
+                <p class="card-text fontSize" style="position: absolute; left: 8%; top: 28%;">₹213</p>
+                <p style="position: absolute; left: 12%; bottom: 5%;">Purchase</p>
+            </div>
+            <div style="    border: 1px solid white; position: absolute; left: 47%; height: 60px; bottom: 20%; "></div>
+            <div>
+                <p class="card-text fontSize" style="position: absolute; right: 8%; top: 28%;">₹4666</p>
+                <p style="position: absolute; right: 12%; bottom: 5%;">Purchase</p>
+            </div>
+            <!-- <div>
+         <p class="card-text fontSize">₹920</p><p>Amount</p>
+       </div> -->
+        </div>
+    </div>
+    <div class="col-5" style="margin-top: 2%">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" style="text-align: center">Top 10 Customers</h5>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">1</th>
+                            <td>Mark</td>
+                            <td>Otto</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">2</th>
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">3</th>
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="card" style="margin-top: 2%">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                    content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-7" style="margin-top: 2%">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                    content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a><h5 class="card-title">Card title</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+                    content.
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a><h5 class="card-title">Card title</h5>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- <a (click)="openPage()">Open Product</a> -->
+
+<!-- <router-outlet></router-outlet> -->

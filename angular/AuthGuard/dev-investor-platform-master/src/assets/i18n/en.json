@@ -1,0 +1,103 @@
+{
+    "welcome": {
+        "title": "Login to Newsportal",
+        "username": "Username",
+        "rememberMe": "Remember me",
+        "forgot": "Forgot Password?",
+        "login": "Login",
+        "notRegistered": "Not Registered yet?",
+        "register": "Register"
+    },
+    "sidebar": {
+        "dashboard": "Dashboard",
+        "newsfeed": "Newsfeed"
+    },
+    "navbar": {
+        "logout": "Logout",
+        "searchPlaceholder": "Search"
+    },
+    "footer": {
+        "powText": "Powered by",
+        "company": "Heroes Development GmbH"
+    },
+    "dashboard": {
+        "reminder": "To-Do Reminder",
+        "project": "Project",
+        "recentActivities": "Recent Activity",
+        "chooseProject": "Choose Project"
+    },
+    "profile": {
+        "edit": "Edit Profile",
+        "firstName": "First Name",
+        "lastName": "Last Name",
+        "email": "Email"
+    },
+    "settings": {
+        "allUser": "All Users",
+        "lastLogin": "Last Login",
+        "activities": "Activities",
+        "newMember": "Add New Member",
+        "editMember": "Edit Member",
+        "jd": "Job Description",
+        "role": "Role"
+    },
+    "project": {
+        "startDate": "Start Date",
+        "toDate": "To Date",
+        "fromDate": "From Date",
+        "dateTo": "Date To",
+        "duration": "Duration",
+        "memCount": "Member Count",
+        "numOfReports": "Number of Reports",
+        "projectName": "Project Name",
+        "iconUpload": "Icon Upload",
+        "selectIcon": "Select Icon",
+        "investor": "Investor",
+        "genInfo": "General Information",
+        "uploadNew": "Upload New",
+        "reportTitle": "Report archive",
+        "reportName": "Report Name",
+        "dateRange": "Date Range",
+        "size": "Size",
+        "action": "Action",
+        "title": "Title",
+        "description": "Description",
+        "updateProject": "Update Project"
+    },
+    "resetPassword": {
+        "passwordSuccess": "Password changed successfully. You will be redirected to login page shortly..."
+    },
+    "commons": {
+        "buttons": {
+            "save": "Save",
+            "cancel": "Cancel",
+            "add": "Add",
+            "edit": "Edit",
+            "update": "Update",
+            "remove": "Remove",
+            "view": "View",
+            "download": "Download",
+            "delete": "Delete",
+            "post": "POST"
+        },
+        "changePassword": {
+            "title": "Change Password",
+            "oldPass": "Old Password",
+            "newPass": "New Password",
+            "confirmPass": "Confirm Password"
+        },
+        "titles": {
+            "addProject": "Add Project",
+            "settings": "Settings",
+            "profile": "Profile",
+            "password": "Password",
+            "members": "Members",
+            "browse": "Browse",
+            "imgCrop": "Crop Image"
+        },
+        "message": {
+            "noResult": "No Result Found",
+            "noReport": "No Reports"
+        }
+    }
+}

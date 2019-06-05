@@ -1,0 +1,80 @@
+<div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar" style="    box-shadow: 2px 1px 3px 1px #d6dde4">
+        <!-- <div class="sidebar-header" style="box-shadow:  1px 1px #e2e3e4;">
+            <h3>
+                <a href="/dashboard">ERP</a>
+            </h3>
+        </div> -->
+        <div class="image_outer_container">
+            <div class="green_icon"></div>
+            <span style="position: absolute; left: 35%; top: 32%;"> {{userName}}</span>
+            <div class="image_inner_container">
+                <img src="https://i0.wp.com/tricksmaze.com/wp-content/uploads/2017/04/Stylish-Girls-Profile-Pictures-36.jpg?resize=300%2C300&ssl=1">
+            </div>
+        </div>
+
+        <ul class="list-unstyled components">
+            <!-- <p>Dummy Heading</p> -->
+            <li [class]="selectedItem == menu.name ? 'active' : '' " (click)="toogleClass($event, menu)" *ngFor="let menu of menus">
+                <a>{{menu.name | titlecase}}</a>
+            </li>
+            <!-- <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="#">Page 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 3</a>
+                    </li>
+                </ul>
+            </li> -->
+        </ul>
+
+        <!-- <ul class="list-unstyled CTAs">
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul> -->
+    </nav>
+
+    <!-- Page Content  -->
+    <!-- <div id="content" style="width: 100%;background-color: #ecf0f3" > -->
+    <div id="content" style="width: 100%;">
+
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #ffffff !important;box-shadow:  1px 2px #e2e3e4;">
+            <div class="container-fluid">
+
+                <!-- <button type="button" id="sidebarCollapse" class="btn btn-info">
+                    <i class="fas fa-align-left"></i>
+                    <span>Toggle Sidebar</span>
+                </button> -->
+                <span id="sidebarCollapse"><i class="fas fa-bars fontColor" style="cursor: pointer;"></i></span>
+
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav ml-auto">
+                        <!-- <li class="nav-item active">
+                            <a class="nav-link fontColor" href="#">Profile</a>
+                        </li> -->
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" (click)="logOut()">Log Out</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- routes will be rendered here -->
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div>

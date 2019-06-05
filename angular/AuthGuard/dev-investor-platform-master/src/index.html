@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Investor News Portal</title>
+    <base href="/">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
+    <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/editor.css" rel="stylesheet">
+    <link href="assets/css/icomoon.css" rel="stylesheet">
+    <style type="text/css">
+        .pace .pace-activity {
+            top: 19px;
+            right: 19px;
+            display: none;
+        }
+
+        .pace .pace-progress {
+            background: #06b4fe;
+        }
+
+        .pace .pace-progress-inner {
+            box-shadow: 0 0 10px #06b4fe, 0 0 5px #06b4fe;
+        }
+
+        .page-loading {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            overflow: hidden;
+            background: #06b4fe;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: -1;
+        }
+
+        .loading-icon {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 38px;
+            height: 38px;
+            margin-left: -19px;
+            margin-top: -19px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+        }
+
+        .loading-icon:before {
+            content: "";
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            width: 38px;
+            height: 38px;
+            margin-left: -19px;
+            margin-top: -19px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+            border-top-color: #ffffff;
+            -webkit-animation: spin 0.5s linear infinite;
+            animation: spin 0.5s linear infinite
+        }
+
+        @-webkit-keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg)
+            }
+
+            to {
+                -webkit-transform: rotate(1turn);
+                transform: rotate(1turn)
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg)
+            }
+
+            to {
+                -webkit-transform: rotate(1turn);
+                transform: rotate(1turn)
+            }
+        }
+
+        app-root:empty~.page-loading {
+            opacity: 1;
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <app-root></app-root>
+    <div class="page-loading">
+        <div class="loading-icon"></div>
+    </div>
+</body>
+
+</html>

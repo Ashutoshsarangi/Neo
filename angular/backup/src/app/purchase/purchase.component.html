@@ -1,0 +1,102 @@
+<div class="collapse" id="collapsePurchase" style="margin: 15px">
+    <div class="card card-body">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="purchaseVender">Vender</label>
+                <select id="purchaseVender" class="form-control" (change)="onVenderSelect($event.target.value)" [(ngModel)]="purchaseInput.venderId">
+                    <option selected value="NA">Select One</option>
+                    <option *ngFor="let vender of venderList" value="{{vender.id}}">{{vender.name}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="purchaseProduct">Product</label>
+                <select id="purchaseProduct" class="form-control" (change)="onProductSelect($event.target.value)" [(ngModel)]="purchaseInput.productId">
+                    <option selected value="NA">Select One</option>
+                    <option *ngFor="let product of productList" value="{{product.id}}">{{product.name}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="purchaseAmount">Amount</label>
+                <input type="text" class="form-control" id="purchaseAmount" [(ngModel)]="purchaseInput.amount">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="purchaseQuantity">Quantity</label>
+                <input type="text" class="form-control" id="purchaseQuantity" [(ngModel)]="purchaseInput.quantity">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="purchaseTotalAmount">Total Amount</label>
+                <input type="text" class="form-control" id="purchaseTotalAmount" [(ngModel)]="purchaseInput.totalprice">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="purchaseCGST">CGST</label>
+                <input type="text" class="form-control" id="purchaseCGST" [(ngModel)]="purchaseInput.CGST">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="purchaseSGST">SGST</label>
+                <input type="text" class="form-control" id="purchaseSGST" [(ngModel)]="purchaseInput.SGST">
+            </div>
+            <!-- <div class="form-group col-md-4">
+                  <label for="purchaseNetAmount">Purchase Net Amount</label>
+                  <input type="text" class="form-control" id="purchaseNetAmount" value="{{(purchaseInput.totalprice + (  purchaseInput.CGST/100 *purchaseInput.totalprice)+ ((purchaseInput.SGST/100 *purchaseInput.totalprice)))}}" readonly>
+                </div> -->
+        </div>
+        <div class="col-12" style="text-align: center">
+            <button type="button" data-toggle="collapse" data-target="#collapsePurchase" aria-expanded="false" aria-controls="collapsePurchase"
+                class="btn btn-primary" *ngIf="!editFlag" (click)="addPurchase()">Add</button>
+            <button type="button" data-toggle="collapse" data-target="#collapsePurchase" aria-expanded="false" aria-controls="collapsePurchase"
+                class="btn btn-primary" *ngIf="editFlag" (click)="updatePurchase()">Update</button>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin: 15px;margin-top: 5%">
+    <div class="form-group has-search col-4">
+        <span class="searchIcon"><i class="fa fa-search"></i></span>
+        <input type="text" class="form-control filterSearch" placeholder="Search..." name="search" autocomplete="off">
+    </div>
+    <div class="col-3" data-toggle="collapse" data-target="#collapsePurchase" aria-expanded="false" aria-controls="collapsePurchase">
+        <a class="float"> <i class="fa fa-plus my-float"></i> </a>
+        <span style="    position: absolute; left: 41%; top: 11%;">New</span>
+    </div>
+    <div class="col-2">
+        <a class="float"> <i class="fas fa-arrow-up my-float"></i> </a>
+        <span style="    position: absolute; left: 41%; top: 11%;">Export</span>
+    </div>
+    <div class="col-12">
+        <table class="table" style="margin-top: 5%">
+            <thead style="background-color: #59d5ff; color: #ffffff;">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Vender Name</th>
+                    <th scope="col">Product</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Total Amount</th>
+                    <th scope="col">CGST</th>
+                    <th scope="col">SGST</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let purchase of purchaseList | paginate: { itemsPerPage: itemsPage, currentPage: p}; let i = index">
+                    <th scope="row"> {{ itemsPage * (p - 1) + i+1 }} </th>
+                    <td>{{purchase.vendername}}</td>
+                    <td>{{purchase.product}}</td>
+                    <td>{{purchase.amount}}</td>
+                    <td>{{purchase.quantity}}</td>
+                    <td>{{purchase.totalprice}}</td>
+                    <td>{{purchase.CGST}}</td>
+                    <td>{{purchase.SGST}}</td>
+                    <td><span (click)="editPurchase(purchase)"> <i class="fas fa-edit" data-toggle="collapse" data-target="#collapsePurchase"
+                                aria-expanded="false" aria-controls="collapsePurchase" style="color: green; cursor: pointer;"></i></span>/<span
+                            (click)="deletePurchase(purchase)"><i class="fas fa-trash-alt" style="color: red; cursor: pointer;"></i></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls (pageChange)="p = $event" style="text-align: center"></pagination-controls>

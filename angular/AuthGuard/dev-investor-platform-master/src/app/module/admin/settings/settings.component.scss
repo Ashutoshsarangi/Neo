@@ -1,0 +1,78 @@
+.pointer{
+    cursor:pointer
+}
+/*New user dropdown*/
+.newuser-dropdown {
+    min-width: 390px;
+    padding: 0;
+    border: none;
+}
+.file {
+  visibility: hidden;
+  position: absolute;
+  max-width: 90%;
+}
+.browse{background: transparent; margin: 0 auto; box-shadow: none !important; outline: none !important;}
+.input-group .form-control.upload-input{    background: transparent !important;
+    text-align: center;
+    border: none;
+    line-height: 20px; display: none;
+    margin: 0;}
+.form-group.mb-0{
+    margin-bottom: 0 !important;
+}
+.newuser-dropdown .form-control {
+    border: 1px solid #e2e2e2;
+    border-radius: 5px;     height: auto !important;
+    /* padding: 8px 15px; */
+}
+.newuser-dropdown select.form-control{
+     /* padding-top: 8px;
+    padding-bottom: 8px;*/
+    -webkit-appearance: none;
+}
+.newuser-dropdown.show{
+    /* position: fixed;
+   border-radius: 0;
+    transform: none;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    padding-top: 40px;
+    padding-bottom: 40px;
+    height: 100vh;
+    align-items: center; 
+    display: flex; */
+}
+.newuser-dropdown .card {
+    /* max-width: 600px;
+    margin: 0 auto;
+    height: 600px;
+    overflow-y: scroll;
+    min-width: 600px; */
+}
+.newuser-dropdown .btn{
+        min-width: 100px;
+}
+.hide{
+    display: none;
+}
+.show{
+    display: block;    
+}
+.height-100{
+    height: 100%;
+}
+.upload-left .input-group{
+        border: 1px solid #e2e2e2;
+    border-radius: 5px;
+}
+.add-link:hover{
+        color: #06b4fe !important;
+            text-decoration: underline;
+}
+
+.right{
+    float:right
+}

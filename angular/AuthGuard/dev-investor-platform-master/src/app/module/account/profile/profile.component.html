@@ -1,0 +1,204 @@
+<ng-progress [positionUsing]="'marginLeft'" [minimum]="0.15" [maximum]="1" [speed]="200" [showSpinner]="false"
+    [direction]="'leftToRightIncreased'" [color]="'#ADC734'" [trickleSpeed]="250" [thick]="false" [ease]="'linear'"></ng-progress>
+
+<div class="row">
+    <div class="col-12 pt-4 px-3 bg-white full-height">
+        <div class="card-body">
+            <div class="table-wrapper">
+                <!--transaction history starts-->
+                <div class="card card-shadow p-0 profile-card">
+                    <div class="card-body">
+                        <div class="profile-wrapper px-3 px-md-5 pt-3 pt-md-5 mb-3 mb-md-5">
+                            <!--card-body starts-->
+                            <div class="row mt-2">
+                                <div class="col-sm-6 d-flex align-items-center">
+                                    <h2 class="text-white text-bold">
+                                        {{ 'commons.titles.profile' | translate }}
+                                    </h2>
+                                </div>
+                                <div *ngIf="!isEdit" class="col-sm-6 text-right mt-3 mt-md-0 text-small-left">
+                                    <p class="mb-0">
+                                        <a (click)="isEdit = true" class="edit-btn pointer">
+                                            {{ 'profile.edit' | translate }}
+                                            <i class="icon-edit edit-btn-icon text-white ml-3"></i>
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--card-body ends-->
+                    <div class="px-3 py-3 px-md-5 py-md-5">
+                        <div class="mt-5">
+                            <form class="inner-form profile-form" [formGroup]="userForm">
+                                <div class="profile-image-wrapper row mt-5">
+                                    <div class="col-md-4 col-lg-2 pb-4">
+                                        <div class="profile-box">
+                                            <div class="profile-upload text-center">
+                                                <img class="profile-img" [src]="previewImage" />
+                                                <i *ngIf="isEdit" class="icon-edit profile-edit-icon"></i>
+                                                <input type="hidden" class="form-control" formControlName="currentImage">
+                                                <input type="file" [attr.disabled]="(!isEdit) ? true : null" (change)="onFileChange($event, imageCropper)"
+                                                    onclick="value=null" name="file" class="profile-icon" [ngClass]="{'pointer': isEdit === true}"
+                                                    #fileInput>
+                                                <h5 class="profile-value text-grey mt-2"></h5>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-8 col-lg-10 d-flex align-items-end">
+                                        <div>
+                                            <h2 class="main-title">{{fullName}}</h2>
+                                            <p class="title-meta mt-2">{{description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="row mt-5">
+                                    <div class="col-md-2 pb-4">
+                                        <div class="profile-box">
+                                            <img src="" class="profile-img" />
+                                            <a href="#">
+                                                <i class="fas fa-pen profile-edit-icon"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                  <input type="file" (change)="onFileChange($event)" onclick="value=null" class="file"
+                                        #fileInput>
+                                    <input type="hidden" class="form-control" formControlName="currentImage">
+                                    <div class="input-group col-xs-12 height-100">
+                                        <div class="input-group-btn text-center" style="width: 100%;">
+                                            <button class="browse d-flex justify-content-center height-100 flex-column align-items-center"
+                                                type="button" (click)="fileInput.click()">
+                                                <img width="120" height="120" [src]="previewImage" [ngClass]="{'rounded-circle': previewImage !=='assets/images/add-user.png'}" />
+                                                <a href="javascript:void(0)" class="btn mt-5">Browse</a>
+                                            </button>
+                                        </div>
+                                        <input type="text" class="form-control input-lg upload-input p-0" disabled
+                                            placeholder="Upload Image">
+                                    </div>
+                                </div> -->
+
+                                <div class="form-group row">
+                                    <label for="fname" class="col-md-4 col-lg-2 col-form-label">
+                                        {{ 'profile.firstName' | translate }}
+                                    </label>
+                                    <div class="col-md-8 col-lg-10">
+                                        <input type="text" class="form-control" [readonly]="!isEdit" formControlName="first_name"
+                                            id="fname" placeholder="{{ 'profile.firstName' | translate }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="lname" class="col-md-4 col-lg-2 col-form-label">
+                                        {{ 'profile.lastName' | translate }}
+                                    </label>
+                                    <div class="col-md-8 col-lg-10">
+                                        <input type="text" class="form-control" [readonly]="!isEdit" formControlName="last_name"
+                                            id="lname" placeholder="{{ 'profile.lastName' | translate }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label for="Email" class="col-md-4 col-lg-2 col-form-label">
+                                        {{ 'profile.email' | translate }}
+                                    </label>
+                                    <div class="col-md-8 col-lg-10">
+                                        <input type="email" class="form-control" [readonly]="!isEdit" formControlName="email"
+                                            id="Email" placeholder="email@gmail.com">
+                                    </div>
+                                </div>
+                                <div class="form-group row" *ngIf="isEdit">
+                                    <label for="Password" class="col-sm-2 col-form-label">
+                                        {{ 'profile.lastName' | translate }}</label>
+                                    <div class="col-sm-10">
+                                        <a class="form-control form-link">
+                                            <span class="pointer" (click)="openChangePassForm(changePassword)">
+                                                {{ 'commons.changePassword.title' | translate }}
+                                            </span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="form-group row" *ngIf="isEdit">
+                                    <div class="col-sm-12 text-right text-small-left">
+                                        <a (click)="getMemberDetails()" id="cancel" class="btn mr-md-3">
+                                            {{ 'commons.buttons.cancel' | translate }}
+                                        </a>
+                                        <a (click)="submitForm()" class="btn btn-primary">
+                                            {{ 'commons.buttons.save' | translate }}
+                                        </a>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <!-- The Modal -->
+                            <ng-template #changePassword let-c="close" let-d="dismiss">
+                                <div class="modal-body p-5">
+                                    <h2 class="main-title text-center mb-4">
+                                        {{ 'commons.changePassword.title' | translate }}</h2>
+                                    <form [formGroup]="changePasswordForm">
+                                        <div class="form-group" *ngIf="!isAdmin">
+                                            <label for="pwd">
+                                                {{ 'commons.changePassword.oldPass' | translate }}
+                                            </label>
+                                            <input type="password" formControlName="old_password" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pwd">
+                                                {{ 'commons.changePassword.newPass' | translate }}
+                                            </label>
+                                            <input type="password" formControlName="new_password" class="form-control">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="pwd">
+                                                {{ 'commons.changePassword.confirmPass' | translate }}
+                                            </label>
+                                            <input type="password" formControlName="confirm_new_password" class="form-control">
+                                        </div>
+                                        <div class="form-group row mt-5">
+                                            <div class="col-md-6 text-center">
+                                                <button type="button" class="btn" (click)="d('Cancel')">
+                                                    {{ 'commons.buttons.cancel' | translate }}
+                                                </button>
+                                            </div>
+                                            <div class="col-md-6 text-center">
+                                                <button type="submit" class="btn btn-primary" (click)="changePass()">
+                                                    {{ 'commons.buttons.save' | translate }}
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </ng-template>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--table-wrapper ends-->
+        </div>
+        <!--card-body ends-->
+    </div>
+    <!--col-md-9 row ends-->
+</div>
+<!--main row ends-->
+<ng-template #imageCropper let-c="close" let-d="dismiss">
+    <div class="modal-body">
+        <h2 class="main-title text-center mb-4">Crop Image</h2>
+        <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1 / 1"
+            [resizeToWidth]="256" [cropperMinWidth]="128" [onlyScaleDown]="true" [roundCropper]="false" format="png"
+            outputType="base64" (imageCropped)="imageCropped($event)" (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+            (loadImageFailed)="loadImageFailed()" [style.display]="showCropper ? null : 'none'"></image-cropper>
+
+        <div class="form-group row mt-5">
+            <div class="col-md-6">
+                <button type="button" class="btn right" (click)="d('Cancel')">
+                    Cancel
+                </button>
+            </div>
+            <div class="col-md-6">
+                <button type="submit" class="btn btn-primary" (click)="c('Save')">
+                    Save
+                </button>
+            </div>
+        </div>
+    </div>
+</ng-template>

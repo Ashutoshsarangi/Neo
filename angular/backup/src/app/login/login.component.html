@@ -1,0 +1,81 @@
+<div class="row">
+    <div class="col-6" style="position: fixed;
+  top: 30%;
+  left: 30%;
+  min-height: 500px">
+        <ul class="nav nav-pills" id="myTab" role="tablist">
+            <li class="nav-item">
+                <a class="nav-link active" id="login-tab" data-toggle="tab" href="#login" role="tab" aria-controls="login" aria-selected="true">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="register-tab" data-toggle="tab" href="#register" role="tab" aria-controls="register" aria-selected="false">Register
+                    Now
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="forgotPassword-tab" data-toggle="tab" href="#forgotPassword" role="tab" aria-controls="forgotPassword"
+                    aria-selected="false">Forgot Password </a>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                <div class="form-group ">
+                    <label for="exampleloginUsername">User Name</label>
+                    <input type="text" class="form-control" id="exampleloginUsername" [(ngModel)]="loginField.username" placeholder="Enter Username">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="loginField.password" placeholder="Password">
+                </div>
+                <button type="button" class="btn btn-primary" (click)="validateUser('login')">Login</button>
+            </div>
+            <div class="tab-pane fade" id="register" role="tabpanel" aria-labelledby="register-tab">
+                <div class="row">
+                    <div class="form-group col-12">
+                        <label for="registerInputEmail">Email address</label>
+                        <input type="email" class="form-control" id="registerInputEmail" [(ngModel)]="registrationField.emailId" aria-describedby="registerEmailHelp"
+                            placeholder="Enter email" required>
+                        <small id="registerEmailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.
+                        </small>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="userName">User Name</label>
+                        <input type="text" class="form-control" id="userName" [(ngModel)]="registrationField.username" aria-describedby="numberHelp"
+                            placeholder="Enter User Name" required>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="phoneNumber">Contact Number</label>
+                        <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="registrationField.contact" aria-describedby="numberHelp"
+                            placeholder="Enter Phone Number" required>
+                        <small id="numberHelp" class="form-text text-muted">We'll never share your Number with anyone else.</small>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="registerInputPassword">Password</label>
+                        <input type="password" class="form-control" id="registerInputPassword" [(ngModel)]="registrationField.password" placeholder="Password"
+                            required>
+                    </div>
+                    <div class="form-group col-6">
+                        <label for="registerconfirmPassword">Confirm Password</label>
+                        <input type="password" class="form-control" id="registerconfirmPassword" [(ngModel)]="registrationField.confPassword" placeholder="Confirm Password"
+                            required>
+                    </div>
+                    <div class="form-group col-12">
+                        <label for="address">Address</label>
+                        <textarea id="address" class="form-control" rows="3" [(ngModel)]="registrationField.address" placeholder="Enter Address"></textarea>
+                    </div>
+                    <button type="button" class="btn btn-success" (click)="validateUser('register')">Register</button>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="forgotPassword" role="tabpanel" aria-labelledby="forgotPassword-tab">
+                <div class="form-group ">
+                    <label for="forgotInputEmail">Enter Your Email address</label>
+                    <input type="email" class="form-control" id="forgotInputEmail" [(ngModel)]="forgotPasswordField.emailId" aria-describedby="forgotEmailHelp"
+                        placeholder="Enter email to share Password">
+                    <small id="forgotEmailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                </div>
+                <button type="button" class="btn btn-success" (click)="validateUser('forgotPassword')">Forgot Password</button>
+            </div>
+        </div>
+    </div>
+</div>

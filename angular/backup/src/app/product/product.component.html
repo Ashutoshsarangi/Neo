@@ -1,0 +1,105 @@
+<div class="collapse" id="collapseProduct" style="margin: 15px">
+    <div class="card card-body">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="productName">Name</label>
+                <input type="text" class="form-control" [(ngModel)]="productInput.name" id="productName" placeholder="Name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="productPrice">Price</label>
+                <input type="text" class="form-control" [(ngModel)]="productInput.price" id="productPrice" placeholder="Price">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="productcategory">Category</label>
+                <select id="productcategory" (change)="onSelect($event.target.value)" class="form-control" [(ngModel)]="productInput.category">
+                    <option selected value="NA">Select One</option>
+                    <option *ngFor="let category of CategoryList" value="{{category.id}}">{{category.name}}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="prosuctCGST">CGST</label>
+                <input type="text" class="form-control" [(ngModel)]="productInput.CGST" id="prosuctCGST">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="prosuctSGST">SGST</label>
+                <input type="text" class="form-control" [(ngModel)]="productInput.SGST" id="prosuctSGST">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="prosuctDiscount">Discount</label>
+                <input type="text" class="form-control" [(ngModel)]="productInput.discount" id="prosuctDiscount">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="productDiscountUnit">Discount Unit</label>
+                <select id="productDiscountUnit" class="form-control" [(ngModel)]="productInput.unit">
+                    <option selected>Choose...</option>
+                    <option value="percent">%</option>
+                    <option value="price">₹</option>
+                </select>
+            </div>
+            <div class="form-group col-md-8">
+                <label for="productDescription">Description</label>
+                <input type="text" class="form-control" [(ngModel)]="productInput.description" id="productDescription" placeholder="Product Description">
+            </div>
+        </div>
+        <div class="col-12" style="text-align: center">
+            <button type="button" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="false" aria-controls="collapseProduct"
+                class="btn btn-primary" *ngIf="!editFlag" (click)="addProduct()">Add</button>
+            <button type="button" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="false" aria-controls="collapseProduct"
+                class="btn btn-primary" *ngIf="editFlag" (click)="updateProduct()">Update</button>
+        </div>
+    </div>
+</div>
+
+<div class="row" style="margin: 15px; margin-top: 5%">
+    <div class="form-group has-search col-4">
+        <span class="searchIcon"><i class="fa fa-search"></i></span>
+        <input type="text" class="form-control filterSearch" placeholder="Search..." name="search" autocomplete="off">
+    </div>
+    <div class="col-3" data-toggle="collapse" data-target="#collapseProduct" aria-expanded="false" aria-controls="collapseProduct">
+        <a class="float"> <i class="fa fa-plus my-float"></i> </a>
+        <span style="    position: absolute; left: 41%; top: 11%;">New</span>
+    </div>
+    <div class="col-2">
+        <a class="float"> <i class="fas fa-arrow-up my-float"></i> </a>
+        <span style="    position: absolute; left: 41%; top: 11%;">Export</span>
+    </div>
+    <div class="col-12">
+        <table class="table" style="margin-top: 5%">
+            <thead style="background-color: #59d5ff; color: #ffffff;">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Discount</th>
+                    <th scope="col">Unit Discount</th>
+                    <th scope="col">CGST</th>
+                    <th scope="col">SGST</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let Product of ProductList | paginate: { itemsPerPage: itemsPage, currentPage: p}; let i = index">
+                    <th scope="row"> {{ itemsPage * (p - 1) + i+1 }} </th>
+                    <td>{{Product.name}}</td>
+                    <td>{{Product.price}}</td>
+                    <td>{{Product.category_name}}</td>
+                    <td>{{Product.discount}}</td>
+                    <td>{{Product.unit}}</td>
+                    <td>{{Product.CGST}}</td>
+                    <td>{{Product.SGST}}</td>
+                    <td>{{Product.description}}</td>
+                    <td><span (click)="editProduct(Product)"> <i class="fas fa-edit" data-toggle="collapse" data-target="#collapseProduct"
+                                aria-expanded="false" aria-controls="collapseProduct" style="color: green; cursor: pointer;"></i></span>/<span
+                            (click)="deleteProduct(Product)"><i class="fas fa-trash-alt" style="color: red; cursor: pointer;"></i></span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<pagination-controls (pageChange)="p = $event" style="text-align: center"></pagination-controls>
