@@ -1,0 +1,65 @@
+1.  Explain Angular Authentication and Authorization.
+Ans:- a. The user is identified with the given JWT(Backend Api). 
+            This is called authentication.
+    b. Module assign -->Authorization.
+
+2. @ngModule() why we need that?
+
+3. why we need <router-outlet> </router-outlet>
+
+4. Observable ~ promises
+
+5. types Of Directives?
+Ans:-  types of directives in Angular; Attribute, structural, and custom.
+
+6. AOT ~ JIT
+
+7. Data Binding?
+Ans:- Event Binding, Property Binding , 2 way data Binding
+
+8. What is the process called by which TypeScript code is converted into JavaScript code?
+Ans:-   Transpiler
+
+9. Dependancy Injection?
+
+10. Services?
+
+11. LifeCycle Of Angular
+Ans:- OnChange()  -  OnInit()  -  DoCheck()  -  AfterContentInit()  -
+      AfterContentChecked()  -  AfterViewInit()  -  AfterViewChecked()  - 
+       OnDestroy(). 
+
+12.  What is the use of @Input and @Output? 
+Ans:- @Input --> passing data from Parent to Child Component 
+      @Output --> passing data from Child to Parent compenent.
+
+13. Pipe And types of Pipe
+Ans:- Pure Pipe, impure Pipe and Asyns Pipe.
+
+14. what is Pure Functions?
+Ans:- Pure Functions do not change the provided value and 
+    give the same output always, when the same value is given multiple times.
+
+15. what is impure functions?
+Ans:- Impure Functions change the provided value and
+     give different output, when the same value is given multiple times.
+
+16. what is @view child ?!
+Ans:- It’s used to communicate data to child component from parent class
+         using class name.
+
+17. what is bootstrapping ?
+Ans:- Bootstrapping is starting of the angular application . 
+    It loads the root module and other components defined inside it .
+
+18. What is the use of NgZone Service?
+Ans:- To run the Asynchronous process outside of $watch.
+
+19. auth guard?
+
+20. HttpInterseptor?
+
+21. type of Module loading?
+
+
+

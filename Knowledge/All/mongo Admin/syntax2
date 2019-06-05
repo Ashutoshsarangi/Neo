@@ -1,0 +1,1 @@
+db.inventory.insert("item" : "DAP", "instock" : [ { "warehouse" : "B", "qty" : 15 }, { "warehouse" : "A", "qty" : 35 } ])

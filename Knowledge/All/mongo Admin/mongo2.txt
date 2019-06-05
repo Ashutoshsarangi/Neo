@@ -1,0 +1,57 @@
+1. Here In Mongo terminal supports js .And the ObjectID() and ISODate()
+    these are just represented as function calls because 
+      a. better understanding/readable the value.
+      b. js terminal does not support for RawBInaryArray formates 
+      so it show as a function calls
+
+2. ObjectId('').getTimeStamp()
+   It will display the Time stamp from the Object Id
+
+------------CURSOR-----------------
+3. Apart From Bunch of data it will go for batch of documents
+Ex:- var x = db.productinfo.find().batchSize(2)
+    a. x.next() for dispalying next setOF Batch
+    b. x.close() close the Cursor
+
+4. Script in the Mongo
+    before that you can add anything in the script file
+    mongo 172.0.0.0/<db name> location of the script file
+
+5. Nested Queries::
+    { "_id" : ObjectId("5cdb95ad72dea365d180d89e"), "item" : "journal", "qty" : 25, 
+    "size" : { "h" : 14, "w" : 21, "uom" : "cm" }, "status" : "A" }
+    
+    O/p:- db.test1.find({"size.uom":"cm"})
+
+6. Array Queries
+    O/p:- db.inventory.find({ "tags":{ $all:["blank"] } })
+    O/p:- db.inventory.find({ "tags":["blank", 'red']  })
+
+7. Column Restriction/ Projection
+    db.inventory.find( { status: "A" }, { item: 1, status: 0, "instock.qty": 1 } )
+
+    db.inventory.find( { item: /^p/ }, { item: 1, instock:{$slice:1} } )
+
+
+------------------------ Query With NUll Values ---------------
+
+8. $type -> sting -> 2
+    $type -> double -> 1
+    $type -> null -> 10
+
+    The query returns only the document where the item field has a value of null.
+
+--------------------------- Check Coulmn Exist Or Not ---------------------
+9. db.inventory.find({"item":{$exists:false}})
+
+    The query only returns the document that does not contain the item field.
+
+10. $Slice for getting values 10 by 10
+    Slice Array takes ---> [skipe, limit]
+    we can also directly use skip and limit in out query
+    db.posts.find( {}, { comments: { $slice: [ 20, 10 ] } } )
+
+11. Sort the documents with respect to time of creation
+    db.inventory.find({}).sort({_id:1}) --->  Ascending order
+
+

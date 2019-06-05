@@ -1,0 +1,62 @@
+1. What are JavaScript Data Types?
+Ans:-
+        Number
+        String
+        Boolean
+        Object
+        Undefined
+
+2. What is called Variable typing in Javascript?
+
+Ans:-   Variable typing is used to assign a number to a variable and 
+        the same variable can be assigned to a string.
+
+        Example
+
+        i = 10;
+        i = "string";
+
+3.  What is the function of delete operator?
+
+Ans:- The delete keyword is used to delete the property as well as its value.
+
+    Example
+
+    var student= {age:20, batch:"ABC"};
+    delete student.age;
+    
+    O/p:- student {batch:"ABC"}
+    
+4. Call by value ~ call by Reference
+Ans:- Objects like Array,JSOn are call by Reference and other are call by value.
+
+5. Push ~ POP ~ UNSHIFT
+Ans:- Unshift method is push the element in the beginning of the array. 
+
+6. Explain window.onload and onDocumentReady?
+Ans:- a. The onload function is not run until all the information on the page
+         is loaded. This leads to a substantial delay before any code is executed.
+
+      b. onDocumentReady loads the code just after the DOM is loaded. 
+        This allows early manipulation of the code.
+
+7. What is the difference between .call() and .apply()?
+Ans:- a. call() is used when the number of the function's arguments
+           are known to the programmer.
+      b. apply() is used when the number is not known.
+    Ex. ['<', '>']
+
+8. Define event bubbling?
+Ans:- JavaScript allows DOM elements to be nested inside each other.
+         In such a case, if the handler of the child is clicked, 
+         the handler of parent will also work as if it were clicked too.
+
+9. What are the various functional components in JavaScript?
+Ans:- a. First-class functions:
+        i. This usually means that these functions can be passed as 
+            arguments to other functions,
+
+      b. Nested functions:
+
+
+

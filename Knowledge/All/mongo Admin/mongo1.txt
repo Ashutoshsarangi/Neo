@@ -1,0 +1,51 @@
+1. ctrl +l --> Clear mongo Termonal
+
+--------- INSERT -------------
+
+2.  db.mongoAdmin.insert({_id:4})
+    WriteResult({ "nInserted" : 1 })
+    Again Insert :-
+    db.mongoAdmin.insert({_id:4})
+    Error:- E11000 duplicate key error collection
+
+3. In Mongo It stores _id value as String
+    so -> null, "", "NULL", "null", NULL are different
+
+4. Mongo Db's _id is combination of Primary Key and Unique Key.
+    Proof:- Here in _id we can insert one null value not 
+            more that One null values in the _id field.
+
+
+---------- SAVE -------------------
+
+5. db.mongoAdmin.save({_id:4})
+    WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 0 })
+
+6. db.mongoAdmin.save({_id:4, x:1, y:false})
+    WriteResult({ "nMatched" : 1, "nUpserted" : 0, "nModified" : 1 }) 
+    O/P:- { "_id" : 4, "x" : 1, "y" : false }
+
+7. If i am tring to change/ Modify the "y" value is it Possible Because
+    IT ALUTIMATELY Update the documents.
+    
+    Ans:-   Yes but the all the rest columns are going to override.
+    Ex:-    db.mongoAdmin.save({_id:4, y:true})
+
+    O/P:- { "_id" : 4, "y" : true }
+    Here the the y vale got changeed but look the x value vanished.
+
+--------------- FIND ----------------
+
+8. find().Pretty()
+
+9. find().limit(1); //Limiting the Documents
+
+10. db.collection.drop() ;// Remove The collection
+
+11. we can not Insert Json Array in the insertOne().
+
+12. UpdateOne() vs UpdateMany()
+
+13. BSON -> Binary Serialize Object Notation.
+
+

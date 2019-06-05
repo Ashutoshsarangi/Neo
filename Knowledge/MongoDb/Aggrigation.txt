@@ -1,0 +1,54 @@
+
+Note:: Aggregation
+
+1. db.employee.aggregate({$group:{_id:null,count:{$sum:"$salary"}}})
+    O/P:-> { "_id" : null, "Total_salary" : 1086800 }
+
+2. db.employee.aggregate({$group:{_id:null,min_age:{$min:"$age"}}})
+    { "_id" : null, "min_age" : 20 }
+
+3. db.employee.aggregate({$group:{_id:null,Average_Salary:{$avg:"$salary"}}})
+    { "_id" : null, "Average_Salary" : 155257.14285714287 }
+
+4. db.employee.aggregate({$group:{_id:"$city",Average_Salary:{$avg:"$salary"}}})
+    { "_id" : "Nepal", "Average_Salary" : 200000 }
+    { "_id" : "Pune", "Average_Salary" : 400000 }
+    { "_id" : "Odisha", "Average_Salary" : 121200 }
+    { "_id" : "Mumbai", "Average_Salary" : 2000 }
+
+
+Note::-> PipeLine Aggregation in MongoDB
+
+1. db.employee.aggregate([{$group:{_id:"$city"}},{$sort:{_id:-1}}])
+    { "_id" : "Pune" }
+    { "_id" : "Odisha" }
+    { "_id" : "Nepal" }
+    { "_id" : "Mumbai" }
+
+2. db.employee.aggregate([{$group:{_id:"$city"}},{$sort:{_id:1}}])
+    { "_id" : "Mumbai" }
+    { "_id" : "Nepal" }
+    { "_id" : "Odisha" }
+    { "_id" : "Pune" }
+
+3.  db.employee.aggregate([{$match:{salary:{$gt:2000}}},{$project:{_id:0, name:1,city:1}}])
+    { "name" : "Anshuman", "city" : "Odisha" }
+    { "name" : "Anshuman", "city" : "Odisha" }
+    { "name" : "Anshuman", "city" : "Odisha" }
+    { "name" : "Bharat", "city" : "Odisha" }
+    { "name" : "Bharat", "city" : "Nepal" }
+    { "name" : "Ashutosh Sarangi", "city" : "Pune" }
+
+4. db.employee.aggregate([{$sort:{salary:1}},{$project:{_id:0, name:1, salary:1}}])
+    { "name" : "Ashutosh", "salary" : 2000 }
+    { "name" : "Anshuman", "salary" : 2400 }
+    { "name" : "Anshuman", "salary" : 2400 }
+    { "name" : "Bharat", "salary" : 200000 }
+    { "name" : "Anshuman", "salary" : 240000 }
+    { "name" : "Bharat", "salary" : 240000 }
+    { "name" : "Ashutosh Sarangi", "salary" : 400000 }
+    
+5. db.employee.aggregate([{$sort:{salary:1}},{$project:{_id:0, name:1, salary:1}},{$limit:3}])
+    { "name" : "Ashutosh", "salary" : 2000 }
+    { "name" : "Anshuman", "salary" : 2400 }
+    { "name" : "Anshuman", "salary" : 2400 }

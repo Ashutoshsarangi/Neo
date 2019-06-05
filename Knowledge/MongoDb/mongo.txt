@@ -1,0 +1,89 @@
+Important Notes::
+
+1. Types Of Database
+    a. OLTP
+    b. OLAP
+    c. NoSql
+
+Note::-->  db.createCollection("employee",{size:5242880, max:100})
+
+2. Components In MongoDb
+    a. Databases
+    b. Collections
+    c. Documents
+
+3. Read and Insert Queries::
+    1. use myDb
+    2. db.employee.insert({name:"Ashutosh", city:"Mumbai",age:20, salary:2000})
+    3. db.employee.find({salary:{$lt: 3000}},{name:1,salary:1}).pretty();
+    4. db.employee.find({$and:[{salary:{$gt: 3000}},{city:"Odisha"}]}).pretty();
+   
+
+4. Update Queries
+    1. db.employee.update({name:"Bharat"},{$set:{age:90}});
+    2. db.employee.updateMany({city:"Odisha"},{$mul:{salary:1.20}});
+
+5. Delet Queries
+    1. db.employee.remove({age:{$eq:23}})
+    2. db.employee.remove({})
+
+6.Embeding In MongoDB
+     1. db.employee.insert({name:"Ashutosh Sarangi", city:"Pune", age:21, salary:400000,address:[{state:"Odisha", pin:761121},{state:"Maharastra", pin:678945}]})
+
+7. Referencing in MongoDB
+
+*. db.categories.find().pretty()
+
+{ "_id" : ObjectId("5cb8bbbf891997a244b5fb44"), "name" : "chair" }
+{ "_id" : ObjectId("5cb8bbc4891997a244b5fb45"), "name" : "computer" }
+{ "_id" : ObjectId("5cb8bbc8891997a244b5fb46"), "name" : "table" }
+{ "_id" : ObjectId("5cb8bbce891997a244b5fb47"), "name" : "mouse" }
+{ "_id" : ObjectId("5cb8bbd2891997a244b5fb48"), "name" : "keyboard" }
+{ "_id" : ObjectId("5cb8bbd6891997a244b5fb49"), "name" : "cpu" }
+
+*. db.createCollection("product",{size:5242880, max:100})
+
+*. db.product.insert({name:"Abc", price:1200, expDate:'', category:{"$ref" : "categories","$id": ObjectId("5cb8bbbf891997a244b5fb44")}})
+
+*. db.product.find().pretty()
+
+{
+	"_id" : ObjectId("5cb8bccd891997a244b5fb4a"),
+	"name" : "Abc",
+	"price" : 1200,
+	"expDate" : "",
+	"category" : DBRef("categories", ObjectId("5cb8bbbf891997a244b5fb44"))
+}
+
+*. var product = db.product.findOne({"name":"Abc"})
+*. var dbRef = product.category
+*. db[dbRef.$ref].findOne({"_id":(dbRef.$id)})
+
+{ "_id" : ObjectId("5cb8bbbf891997a244b5fb44"), "name" : "chair" }
+
+*. product.category = db[dbRef.$ref].findOne({"_id":(dbRef.$id)})
+*. product
+O/P:
+    {
+	"_id" : ObjectId("5cb8bccd891997a244b5fb4a"),
+	"name" : "Abc",
+	"price" : 1200,
+	"expDate" : "",
+	"category" : {
+		"_id" : ObjectId("5cb8bbbf891997a244b5fb44"),
+		"name" : "chair"
+	}
+}
+
+*. db.product.insert({name:"Abc", price:1200, expDate:'', category:{"$ref" : "categories","$id":[ ObjectId("5cb8bbbf891997a244b5fb44"), ObjectId("5cb8bbd2891997a244b5fb48")]}})
+
+{
+	"_id" : ObjectId("5cb8c3b9891997a244b5fb4b"),
+	"name" : "Abc",
+	"price" : 1200,
+	"expDate" : "",
+	"category" : DBRef("categories", [
+	ObjectId("5cb8bbbf891997a244b5fb44"),
+	ObjectId("5cb8bbd2891997a244b5fb48")
+])
+}

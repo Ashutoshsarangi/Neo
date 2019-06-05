@@ -1,0 +1,126 @@
+1. var ~ let
+Ans:    var is function scoped and let is block scoped. 
+        It can be said that a variable declared with var is defined throughout 
+        the program as compared to let.
+
+2. undefined ~ null
+Ans:-   We assign null to a variable.
+        but when we declare a variable but not assign a vlaue i.e called undefined.
+
+3. type of undefined and type of null
+Ans:-   undefined and Object
+
+4. prototypal inheritance in javascript
+Ans:-   a. Objects can inherit things from other objects. 
+        b. Inheritance in JavaScript works through something called prototypes
+             and this form of inheritance is often called prototypal inheritance.
+
+5. JavaScript Clouser
+Ans:-   a. A closure gives you access to an outer function's scope
+             from an inner function.
+
+6. map ~ forEach
+Ans:-   a. forEach() —> executes a provided function once for each array element.
+        b. map() —> creates a new array with the results of calling a provided
+                     function on every element in the calling array.
+
+7. Callback ~ Callback Hell ~ Promices ~ Asyns Wait
+Ans:-   Asyns awit Ex
+        function who() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                resolve('🤡');
+                }, 200);
+            });
+        }
+
+        function what() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                resolve('lurks');
+                }, 300);
+            });
+        }
+
+        function where() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                resolve('in the shadows');
+                }, 500);
+            });
+        }
+
+        async function msg() {
+            const a = await who();
+            const b = await what();
+            const c = await where();
+
+            console.log(`${ a } ${ b } ${ c }`);
+        }
+
+        O/p:-
+
+
+8. Fat Arrow function ~ function
+Ans:-   a. Use of this keyword
+            i.  Unlike regular functions, arrow functions do not have their own this.
+            
+            Ex. let user = { 
+                        name: "GFG", 
+                        gfg1:() => { 
+                            console.log("hello " + this.name); // no 'this' binding here 
+                        }, 
+                        gfg2(){        
+                            console.log("Welcome to " + this.name); // 'this' binding works here 
+                        }   
+                    }; 
+                user.gfg1(); 
+                user.gfg2(); 
+            O/p: Hello undefined
+                welcome to GFG
+        
+        b. Availability of arguments objects
+            i. Arguments objects are not available in arrow functions, 
+                but are available in regular functions.
+            
+            Ex. let user = {       
+                        show(){ 
+                            console.log(arguments); 
+                        } 
+                    }; 
+                user.show(1, 2, 3);
+            O/p:-Arguments(3) [1, 2, 3, callee: ƒ, Symbol(Symbol.iterator): ƒ]
+            
+            Ex2.    let user = {      
+                            show_ar : () => { 
+                                console.log(...arguments); 
+                            } 
+                        }; 
+                    user.show_ar(1, 2, 3);  
+            O/p: argument is not defined (error).
+        
+        c. Using new keyword
+            i.
+            Ex. let x = function(){ 
+                    console.log(arguments); 
+                }; 
+                new x =(1,2,3); 
+            o/p:    arguments{0:1, 1:1, 2:3}
+
+            Ex2. let x = ()=> { 
+                    console.log(arguments); 
+                }; 
+                new x(1,2,3); 
+            O/p: x is not a constructor
+
+
+9. Higher Order Functions
+Ans:-   A higher-order function is a function that can take another 
+        function as an argument, or that returns a function as a result
+
+10. Push.Apply ~ concate
+Ans:-   a. push() adds elements to the end of an array and returns
+            the new length of the array. 
+        b. The concat() method is used to merge arrays. Concat does not change the existing arrays,
+             but instead returns a new array.
+

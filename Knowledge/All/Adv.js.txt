@@ -1,0 +1,56 @@
+1. console.log(2+'2')  // O/P  22
+
+2. console.log(2-'2')  // O/P  0
+
+3. let num = [1, 2, 2, 3];
+remove Duplicate in a single line
+Ans:- Set(4) {1, 2, 3, 4}
+        [...(new Set(num))]
+        (4) [1, 2, 3, 4]
+
+4. JSON 
+Ans:- Freeze
+
+5. Constant Property 
+var a= {
+       name:'As'
+    }
+    Object.freeze(a)
+
+6. Allow to modify existing properties but restrict the new keys 
+b = {
+        name: 'asd'
+    }
+    Object.seal(b)
+
+7. Define Objects
+var profile = {
+        name:'Ashu'
+    }
+    Object.defineProperty(profile, 'age',{
+        value:3,
+        writable:false
+    });
+
+
+8. Javascript Hoisting?
+Ans:-
+
+9.function declaration ~ function expression
+Ans:- function test(){
+        console.log('it is function declaration');
+    }
+    let test1 = function(){
+        console.log('it is function expression');
+    }
+
+10. const x = 'constructor';
+Ans:- console.log(x[x](01));
+        ƒ String() { [native code] }
+        O/p:- 1 (string)
+
+11. a. console.log(('hi').__proto__)                      --> String
+    b. console.log(('hi').__proto__.__proto__)            --> Constructor (Object)
+    c. console.log(('hi').__proto__.__proto__.__proto__)  --> null
+
+

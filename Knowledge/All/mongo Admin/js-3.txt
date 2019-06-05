@@ -1,0 +1,22 @@
+1. preventDefault vs. stopPropagation vs. stopImmediatePropagation
+Ans:-
+    a. preventDefault: Cancels the event if it is cancelable, 
+                        without stopping further propagation of the event.
+
+    b. stopPropagation: Prevents further propagation of the current event.
+
+    c. stopImmediatePropagation: Prevents other listeners of the same event 
+                                from being called.
+
+reference:- more on example
+https://codeplanet.io/preventdefault-vs-stoppropagation-vs-stopimmediatepropagation/
+
+2. Grunt and gulp
+Ans:- These are task runners grunt is used in configuration files 
+        but gulpis advanced it is done through the streams.
+
+3. Grunt taskRunners.
+Ans:-  Grunt is a JavaScript task runner, a tool used to automatically 
+        perform frequent tasks such as minification, compilation, unit testing, 
+        and linting.
+      

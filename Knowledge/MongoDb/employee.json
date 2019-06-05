@@ -1,0 +1,7 @@
+{"_id":{"$oid":"5cb8a9cd891997a244b5fb3c"},"name":"Ashutosh","city":"Mumbai","age":20.0,"salary":2000.0}
+{"_id":{"$oid":"5cb8a9ef891997a244b5fb3d"},"name":"Anshuman","city":"Odisha","age":20.0,"salary":2400.0}
+{"_id":{"$oid":"5cb8a9f8891997a244b5fb3e"},"name":"Anshuman","city":"Odisha","age":40.0,"salary":2400.0}
+{"_id":{"$oid":"5cb8a9fb891997a244b5fb3f"},"name":"Anshuman","city":"Odisha","age":40.0,"salary":240000.0}
+{"_id":{"$oid":"5cb8aa05891997a244b5fb40"},"name":"Bharat","city":"Odisha","age":90.0,"salary":240000.0}
+{"_id":{"$oid":"5cb8aa0c891997a244b5fb41"},"name":"Bharat","city":"Nepal","age":40.0,"salary":200000.0}
+{"_id":{"$oid":"5cb8b909891997a244b5fb43"},"name":"Ashutosh Sarangi","city":"Pune","age":21.0,"salary":400000.0}

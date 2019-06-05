@@ -1,0 +1,13 @@
+1. What is sharding in MongoDB ?
+Ans:- The procedure of storing data records across multiple machines
+         is referred as Sharding.
+
+2. Explain what is a replica set?
+Ans:-  A replica set is a group of mongo instances that host the same data set.
+         In replica set, one node is primary, and another is secondary.
+
+3. $look Up, aggregation, population, transaction,
+
+4. $ref, embeded
+
+6. $gt, $lt, $eq

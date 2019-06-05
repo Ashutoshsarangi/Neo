@@ -1,0 +1,73 @@
+
+
+db.productinfo.aggregate( [ { $group : { categ_id : "$categ_id" } } ] )
+
+
+
+db.productinfo.insert([
+{
+	"categ_id" : 103,
+	"prod_rating" : 3.1,
+},
+{
+	"categ_id" : 103,
+	"prod_rating" : 3,
+},
+{
+	"categ_id" : 103,
+	"prod_rating" : 4,
+},
+{
+	"categ_id" : 104,
+	"prod_rating" : 3.2,
+},
+{
+	"categ_id" : 104,
+	"prod_rating" : 3.2,
+},
+{
+	"categ_id" : 104,
+	"prod_rating" : 3.4,
+}
+])
+
+db.test1.insertMany(
+    [
+   { item: "journal", qty: 25, size: { h: 14, w: 21, uom: "cm" }, status: "A" },
+   { item: "notebook", qty: 50, size: { h: 8.5, w: 11, uom: "in" }, status: "A" },
+   { item: "paper", qty: 100, size: { h: 8.5, w: 11, uom: "in" }, status: "D" },
+   { item: "planner", qty: 75, size: { h: 22.85, w: 30, uom: "cm" }, status: "D" },
+   { item: "postcard", qty: 45, size: { h: 10, w: 15.25, uom: "cm" }, status: "A" }
+]
+)
+
+SELECT * FROM inventory 
+WHERE status in("A", "D")  AND ( qty < 30 OR item LIKE "p%")
+
+db.test1.find({
+    status: { $in : ['A', 'D'] },
+    $or:[
+        { qty : { $lt : 30 } },
+        { item : /^p/ }
+
+    ]
+})
+
+db.test1.find({
+    item:/^p/
+})
+
+ OR::
+db.test1.find(
+        $or:[
+                { 
+                    statue: { $in : ['A', 'D'] }
+                },
+            $or:[
+                { qty : { $lt : 30 } },
+                { item : /^p/}
+
+            ]
+        ]
+    )
+

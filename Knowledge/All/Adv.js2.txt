@@ -1,0 +1,19 @@
+1. What will be the value of j so i can ge the follwoing o/p.
+Ans:-
+    let j = Number.MIN_VALUE;
+    console.log( j * j ); //0
+    console.log( j + 1 ); //1
+    console.log( j - 1 ); //-1
+    console.log( j / j ); //1
+
+2. var x = {
+        a:1,
+        b:2
+    }
+Object.entries(x)
+O/p:-  0: Array(2)
+        0: "a"
+        1: 1
+        length: 2
+        __proto__: Array(0)
+        1: (2) ["b", 2]

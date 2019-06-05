@@ -1,0 +1,2 @@
+1. oncontextmenu="return false"
+ is for Prevent the User for Right Click
